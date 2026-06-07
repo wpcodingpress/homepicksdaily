@@ -5,14 +5,20 @@ import BestsellerGrid from "@/components/home/BestsellerGrid";
 import HowItWorks from "@/components/home/HowItWorks";
 import Testimonials from "@/components/home/Testimonials";
 import NewsletterSignup from "@/components/home/NewsletterSignup";
+import { getProducts } from "@/lib/woocommerce";
 
-export default function HomePage() {
+export default async function HomePage() {
+  const { products } = await getProducts({
+    per_page: "8",
+    orderby: "popularity",
+  });
+
   return (
     <>
       <HeroBanner />
       <ValuePropositions />
       <FeaturedCategories />
-      <BestsellerGrid />
+      <BestsellerGrid initialProducts={products} />
       <HowItWorks />
       <Testimonials />
       <NewsletterSignup />

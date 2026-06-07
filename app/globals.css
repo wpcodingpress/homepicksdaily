@@ -1,29 +1,142 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-brand-orange-400: #f0952e;
-  --color-brand-orange-500: #ec7f19;
-  --color-brand-orange-600: #d4700f;
-  --color-brand-orange-700: #b85f0c;
-  --color-brand-blue-400: #2d6499;
-  --color-brand-blue-500: #1b4871;
-  --color-brand-blue-600: #153a5c;
-  --color-brand-blue-700: #0f2b44;
+  --color-brand-orange: #ff6b00;
+  --color-brand-orange-light: #ff8c38;
+  --color-brand-orange-glow: #ff6b0033;
+  --color-brand-blue: #0a2540;
+  --color-brand-blue-mid: #1a3f6f;
+  --color-brand-blue-light: #2563eb;
+  --color-brand-cyan: #00d4ff;
   --color-surface-white: #ffffff;
-  --color-surface-light: #f8f9fa;
-  --color-surface-muted: #f1f3f5;
-  --color-ink: #1a1a2e;
-  --color-ink-muted: #4a4a6a;
-  --color-ink-light: #8a8aaa;
-  --color-success: #22c55e;
-  --color-warning: #f59e0b;
-  --color-error: #ef4444;
-  --font-heading: var(--font-nunito);
-  --font-body: var(--font-inter);
+  --color-surface-light: #f0f7ff;
+  --color-surface-card: #ffffff;
+  --color-ink: #0a2540;
+  --color-ink-muted: #4a6080;
+  --color-ink-light: #8aaabb;
+  --color-success: #00c853;
+  --color-warning: #ffb300;
+  --color-error: #ff3d00;
+  --font-heading: var(--font-syne);
+  --font-body: var(--font-dm-sans);
 }
 
 body {
   font-family: var(--font-body), system-ui, sans-serif;
   color: var(--color-ink);
   background: var(--color-surface-white);
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%,
+  100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes pulse-ring {
+  0% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 0, 0.4);
+  }
+  70% {
+    box-shadow: 0 0 0 16px rgba(255, 107, 0, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(255, 107, 0, 0);
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: -200% 0;
+  }
+  100% {
+    background-position: 200% 0;
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes scaleIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(32px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.stagger > *:nth-child(1) {
+  transition-delay: 0.1s;
+}
+.stagger > *:nth-child(2) {
+  transition-delay: 0.2s;
+}
+.stagger > *:nth-child(3) {
+  transition-delay: 0.3s;
+}
+.stagger > *:nth-child(4) {
+  transition-delay: 0.4s;
+}
+
+.hero-title {
+  animation: slideUp 0.7s ease forwards;
+}
+
+.hero-subtitle {
+  animation: slideUp 0.7s ease 0.2s forwards;
+  opacity: 0;
+}
+
+.hero-ctas {
+  animation: slideUp 0.7s ease 0.4s forwards;
+  opacity: 0;
+}
+
+.hero-image {
+  animation: scaleIn 0.8s ease 0.3s forwards;
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
 }

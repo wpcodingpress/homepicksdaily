@@ -1,23 +1,28 @@
 "use client";
 
 import { useCartStore } from "@/lib/cart";
+import { cn } from "@/lib/utils";
 
-export default function CartIcon() {
+interface CartIconProps {
+  scrolled?: boolean;
+}
+
+export default function CartIcon({ scrolled = false }: CartIconProps) {
   const count = useCartStore((s) => s.items.reduce((sum, i) => sum + i.quantity, 0));
   const openCart = useCartStore((s) => s.openCart);
 
   return (
     <button
       onClick={openCart}
-      className="relative flex h-10 w-10 items-center justify-center text-white"
+      className={cn(
+        "relative flex h-10 w-10 items-center justify-center rounded-full transition-colors",
+        scrolled
+          ? "text-white hover:bg-white/10"
+          : "text-brand-blue hover:bg-surface-light"
+      )}
       aria-label="Open cart"
     >
-      <svg
-        className="h-6 w-6"
-        fill="none"
-        viewBox="0 0 24 24"
-        stroke="currentColor"
-      >
+      <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
         <path
           strokeLinecap="round"
           strokeLinejoin="round"
@@ -26,7 +31,7 @@ export default function CartIcon() {
         />
       </svg>
       {count > 0 && (
-        <span className="absolute -right-1 -top-1 flex h-5 min-w-[20px] items-center justify-center rounded-full bg-brand-orange-500 px-1 text-xs font-bold text-white">
+        <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-brand-orange px-1 text-[10px] font-bold text-white">
           {count > 99 ? "99+" : count}
         </span>
       )}
