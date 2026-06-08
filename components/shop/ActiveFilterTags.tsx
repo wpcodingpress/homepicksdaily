@@ -2,6 +2,7 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
+import { X } from "lucide-react";
 
 export default function ActiveFilterTags() {
   const searchParams = useSearchParams();
@@ -31,17 +32,15 @@ export default function ActiveFilterTags() {
 
   return (
     <div className="flex flex-wrap items-center gap-2">
-      <span className="text-sm text-ink-muted">Filters:</span>
+      <span className="text-sm text-[#6B7280]">Filters:</span>
       {tags.map((tag) => (
         <Link
           key={tag.label}
           href={tag.href}
-          className="inline-flex items-center gap-1 rounded-full bg-surface-muted px-3 py-1 text-sm text-ink-muted transition-colors hover:bg-surface-muted/80"
+          className="inline-flex items-center gap-1 rounded-full bg-gray-100 px-3 py-1 text-sm text-[#6B7280] transition-colors hover:bg-gray-200"
         >
           {tag.label}
-          <svg className="h-3 w-3" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
+          <X className="w-3 h-3" />
         </Link>
       ))}
     </div>

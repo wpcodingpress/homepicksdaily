@@ -2,6 +2,7 @@
 
 import { useRouter, useSearchParams } from "next/navigation";
 import { useState } from "react";
+import { ChevronRight } from "lucide-react";
 
 export default function ShopFilters() {
   const router = useRouter();
@@ -19,32 +20,47 @@ export default function ShopFilters() {
     router.push(`/shop?${params.toString()}`);
   };
 
+  const clearFilters = () => {
+    router.push("/shop");
+  };
+
   return (
-    <aside className="space-y-6">
+    <aside className="space-y-6 rounded-xl bg-white p-6 shadow-lg">
+      <div className="flex items-center justify-between">
+        <h3 className="font-heading text-base font-bold text-[#1C1C2E]">Filters</h3>
+        <button
+          onClick={clearFilters}
+          className="text-sm font-medium text-[#FF5722] transition-colors hover:text-[#FF7043]"
+        >
+          Clear Filters
+        </button>
+      </div>
+
       <div>
-        <h3 className="mb-3 font-heading text-sm font-bold uppercase text-ink">
+        <button className="flex w-full items-center justify-between py-2 text-sm font-semibold text-[#1C1C2E]">
           Price Range
-        </h3>
-        <div className="flex items-center gap-2">
+          <ChevronRight className="w-4 h-4 text-gray-400 -rotate-90" />
+        </button>
+        <div className="mt-2 flex items-center gap-2">
           <input
             type="number"
             placeholder="Min"
             value={min}
             onChange={(e) => setMin(e.target.value)}
-            className="w-full rounded-lg border border-surface-muted px-3 py-2 text-sm text-ink placeholder:text-ink-light focus:ring-2 focus:ring-brand-orange-500"
+            className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-[#1C1C2E] placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-[#FF5722]"
           />
-          <span className="text-ink-light">-</span>
+          <span className="text-gray-400">-</span>
           <input
             type="number"
             placeholder="Max"
             value={max}
             onChange={(e) => setMax(e.target.value)}
-            className="w-full rounded-lg border border-surface-muted px-3 py-2 text-sm text-ink placeholder:text-ink-light focus:ring-2 focus:ring-brand-orange-500"
+            className="w-full rounded-lg border border-gray-200 px-3 py-2 text-sm text-[#1C1C2E] placeholder:text-gray-400 outline-none focus:ring-2 focus:ring-[#FF5722]"
           />
         </div>
         <button
           onClick={applyPriceFilter}
-          className="mt-2 w-full rounded-lg bg-brand-orange-500 py-2 text-sm font-bold text-white transition-colors hover:bg-brand-orange-600"
+          className="mt-2 w-full rounded-lg bg-[#FF5722] py-2 text-sm font-bold text-white transition-colors hover:bg-[#FF7043]"
         >
           Apply
         </button>

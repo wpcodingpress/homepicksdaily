@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Link from "next/link";
 import type { Metadata } from "next";
 import { getProducts } from "@/lib/woocommerce";
 import ProductGrid from "@/components/product/ProductGrid";
@@ -7,6 +8,7 @@ import ShopFilters from "@/components/shop/ShopFilters";
 import SortDropdown from "@/components/shop/SortDropdown";
 import ActiveFilterTags from "@/components/shop/ActiveFilterTags";
 import Pagination from "@/components/shop/Pagination";
+import { Home, ChevronRight } from "lucide-react";
 
 export const metadata: Metadata = {
   title: "Shop All Products",
@@ -50,36 +52,47 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
   const { products, totalPages } = await getProducts(params);
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <div className="mb-6">
-        <h1 className="font-heading text-3xl font-bold text-ink">
-          Shop All Products
-        </h1>
-      </div>
-
-      <div className="flex flex-col gap-6 lg:flex-row">
-        <div className="w-full lg:w-56 lg:flex-shrink-0">
-          <ShopFilters />
+    <>
+      <section className="bg-[#1C1C2E] py-12">
+        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+          <div className="mb-2 flex items-center gap-2 text-sm text-white/60">
+            <Link href="/" className="transition-colors hover:text-white">
+              <Home className="w-4 h-4" />
+            </Link>
+            <ChevronRight className="w-4 h-4" />
+            <span className="text-white/90">Shop</span>
+          </div>
+          <h1 className="font-heading text-4xl font-extrabold text-white sm:text-5xl">
+            Our Products
+          </h1>
         </div>
+      </section>
 
-        <div className="flex-1">
-          <div className="mb-4 flex items-center justify-between">
-            <ActiveFilterTags />
-            <SortDropdown />
+      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+        <div className="flex flex-col gap-6 lg:flex-row">
+          <div className="w-full lg:w-72 lg:flex-shrink-0">
+            <ShopFilters />
           </div>
 
-          <Suspense fallback={<SkeletonGrid />}>
-            <ProductGrid products={products} />
-          </Suspense>
+          <div className="flex-1">
+            <div className="mb-4 flex items-center justify-between">
+              <ActiveFilterTags />
+              <SortDropdown />
+            </div>
 
-          <Pagination
-            currentPage={parseInt(page, 10)}
-            totalPages={totalPages}
-            basePath="/shop"
-            searchParams={sp as Record<string, string>}
-          />
+            <Suspense fallback={<SkeletonGrid />}>
+              <ProductGrid products={products} />
+            </Suspense>
+
+            <Pagination
+              currentPage={parseInt(page, 10)}
+              totalPages={totalPages}
+              basePath="/shop"
+              searchParams={sp as Record<string, string>}
+            />
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 }

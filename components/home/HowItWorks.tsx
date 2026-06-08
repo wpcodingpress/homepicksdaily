@@ -1,28 +1,26 @@
 "use client";
 
+import { Search, ShoppingCart, Package } from "lucide-react";
 import { useScrollReveal } from "@/hooks/useScrollReveal";
 
 const steps = [
   {
     number: "01",
-    emoji: "\U0001F50D",
-    title: "Browse & Choose",
-    description:
-      "Explore 500+ curated eco-friendly home products for every room",
+    icon: <Search className="w-8 h-8" />,
+    title: "Discover",
+    description: "Browse 500+ curated eco-friendly home products",
   },
   {
     number: "02",
-    emoji: "\U0001F6D2",
-    title: "Add & Checkout",
-    description:
-      "Secure PayPal checkout in under 60 seconds — no account needed",
+    icon: <ShoppingCart className="w-8 h-8" />,
+    title: "Order",
+    description: "Add to cart, checkout securely via PayPal in 60 seconds",
   },
   {
     number: "03",
-    emoji: "\U0001F4E6",
-    title: "Delivered Fast",
-    description:
-      "Tracked worldwide shipping straight to your door",
+    icon: <Package className="w-8 h-8" />,
+    title: "Delivered",
+    description: "Fast tracked worldwide shipping straight to your door",
   },
 ];
 
@@ -30,40 +28,39 @@ export default function HowItWorks() {
   const ref = useScrollReveal<HTMLDivElement>();
 
   return (
-    <section className="bg-surface-light py-16 sm:py-20">
+    <section className="bg-[#F5F5F5] py-16 sm:py-20">
       <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
         <div className="mb-14 text-center">
-          <p className="font-body text-xs font-semibold uppercase tracking-[3px] text-brand-orange">
+          <p className="text-xs font-bold uppercase tracking-[4px] text-[#00BCD4]">
             How It Works
           </p>
-          <h2 className="mt-2 font-heading text-3xl font-extrabold text-brand-blue sm:text-4xl">
+          <h2 className="mt-2 font-heading text-3xl font-extrabold text-[#1C1C2E] sm:text-4xl">
             Three Simple Steps
           </h2>
-          <p className="mt-3 text-ink-muted">
+          <p className="mt-3 text-[#6B7280]">
             Getting started is easy
           </p>
         </div>
 
-        <div
-          ref={ref}
-          className="reveal relative grid gap-8 md:grid-cols-3"
-        >
-          <div className="absolute left-[16%] right-[16%] top-9 hidden border-t-2 border-dashed border-brand-orange/30 md:block" />
+        <div ref={ref} className="reveal relative grid gap-8 md:grid-cols-3">
+          <div className="absolute left-[16%] right-[16%] top-9 hidden border-t-2 border-dashed border-[#FF5722] opacity-40 md:block" />
 
           {steps.map((s, i) => (
             <div key={s.number} className="relative text-center">
-              <div className="mx-auto flex h-16 w-16 animate-[pulse-ring_2s_ease-in-out_infinite] items-center justify-center rounded-full bg-brand-orange">
-                <span className="font-heading text-xl font-bold text-white">
+              <div className="mx-auto flex h-[72px] w-[72px] items-center justify-center rounded-full bg-[#FF5722] text-white">
+                <span className="font-heading text-2xl font-black">
                   {s.number}
                 </span>
               </div>
 
-              <div className="mt-6 text-3xl">{s.emoji}</div>
+              <div className="mt-4 flex justify-center text-[#00BCD4]">
+                {s.icon}
+              </div>
 
-              <h3 className="mt-3 font-heading text-xl font-bold text-brand-blue">
+              <h3 className="mt-3 font-heading text-xl font-bold text-[#1C1C2E]">
                 {s.title}
               </h3>
-              <p className="mt-2 leading-relaxed text-ink-muted">
+              <p className="mt-2 leading-relaxed text-[#6B7280]">
                 {s.description}
               </p>
             </div>

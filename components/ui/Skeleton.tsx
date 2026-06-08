@@ -5,23 +5,16 @@ interface SkeletonProps {
 }
 
 export default function Skeleton({ className }: SkeletonProps) {
-  return (
-    <div
-      className={cn(
-        "animate-pulse rounded-lg bg-surface-muted",
-        className
-      )}
-    />
-  );
+  return <div className={cn("skeleton", className)} />;
 }
 
 export function ProductCardSkeleton() {
   return (
-    <div className="rounded-xl bg-white p-4 shadow-sm">
-      <Skeleton className="aspect-square w-full rounded-lg" />
-      <Skeleton className="mt-3 h-4 w-3/4" />
-      <Skeleton className="mt-2 h-4 w-1/2" />
-      <Skeleton className="mt-3 h-10 w-full" />
+    <div className="rounded-2xl bg-white p-4 shadow-sm">
+      <div className="skeleton aspect-square w-full rounded-xl" />
+      <div className="skeleton mt-3 h-4 w-3/4" />
+      <div className="skeleton mt-2 h-4 w-1/2" />
+      <div className="skeleton mt-3 h-10 w-full" />
     </div>
   );
 }

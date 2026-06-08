@@ -9,7 +9,7 @@ export default function ProductGrid({ products }: ProductGridProps) {
   if (products.length === 0) {
     return (
       <div className="py-16 text-center">
-        <p className="text-ink-muted">No products found.</p>
+        <p className="text-[#6B7280]">No products found.</p>
       </div>
     );
   }

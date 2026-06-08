@@ -1,4 +1,5 @@
 import Link from "next/link";
+import { ChevronRight } from "lucide-react";
 import { decodeHtml } from "@/lib/utils";
 
 interface ProductBreadcrumbProps {
@@ -13,27 +14,27 @@ export default function ProductBreadcrumb({
   const primary = categories.find((c) => c.slug !== "uncategorized") ?? categories[0];
 
   return (
-    <nav className="flex items-center gap-2 text-sm text-ink-muted">
-      <Link href="/" className="hover:text-brand-orange-500">
+    <nav className="flex items-center gap-2 text-sm text-[#6B7280]">
+      <Link href="/" className="transition-colors hover:text-[#FF5722]">
         Home
       </Link>
-      <span>/</span>
-      <Link href="/shop" className="hover:text-brand-orange-500">
+      <ChevronRight className="w-4 h-4" />
+      <Link href="/shop" className="transition-colors hover:text-[#FF5722]">
         Shop
       </Link>
       {primary && (
         <>
-          <span>/</span>
+          <ChevronRight className="w-4 h-4" />
           <Link
             href={`/category/${primary.slug}`}
-            className="hover:text-brand-orange-500"
+            className="transition-colors hover:text-[#FF5722]"
           >
             {decodeHtml(primary.name)}
           </Link>
         </>
       )}
-      <span>/</span>
-      <span className="text-ink line-clamp-1">{productName}</span>
+      <ChevronRight className="w-4 h-4" />
+      <span className="text-[#1C1C2E] line-clamp-1">{productName}</span>
     </nav>
   );
 }

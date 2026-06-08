@@ -1,6 +1,6 @@
 "use client";
 
-import { getCustomerAttributes } from "@/lib/utils";
+import { cn } from "@/lib/utils";
 import type { WCAttribute, WCVariation } from "@/lib/types";
 
 interface ProductVariantSelectorProps {
@@ -16,53 +16,91 @@ export default function ProductVariantSelector({
   selected,
   onChange,
 }: ProductVariantSelectorProps) {
-  const customerAttrs = getCustomerAttributes(attributes);
-
-  if (customerAttrs.length === 0) return null;
+  const getAvailableOptions = (attrName: string) => {
+    const attrSlug = `attribute_${attrName.toLowerCase()}`;
+    return variations
+      .filter((v) => v.purchasable)
+      .filter((v) =>
+        Object.entries(selected).every(
+          ([key, val]) =>
+            !val ||
+            key === attrName ||
+            v.attributes.some(
+              (a) => `attribute_${a.name.toLowerCase()}` === `attribute_${key.toLowerCase()}` && a.option === val
+            )
+        )
+      )
+      .flatMap((v) =>
+        v.attributes
+          .filter((a) => `attribute_${a.name.toLowerCase()}` === attrSlug)
+          .map((a) => a.option)
+      );
+  };
 
   return (
     <div className="space-y-4">
-      {customerAttrs.map((attr) => {
-        const isColor = attr.name.toLowerCase() === "color";
+      {attributes.map((attr) => {
+        const attrKey = attr.name;
+        const available = getAvailableOptions(attrKey);
 
         return (
-          <div key={attr.slug}>
-            <label className="mb-2 block text-sm font-semibold text-ink">
-              {attr.name}:
-              <span className="ml-1 text-ink-muted font-normal">
-                {selected[attr.name] || "Select"}
-              </span>
+          <div key={attrKey}>
+            <label className="mb-2 block text-sm font-semibold text-[#1C1C2E]">
+              {attrKey}: <span className="ml-1 font-normal text-[#6B7280]">{selected[attrKey] || "Select"}</span>
             </label>
-            <div className="flex flex-wrap gap-2">
-              {attr.options.map((option) => {
-                const isSelected = selected[attr.name] === option;
-                return isColor ? (
-                  <button
-                    key={option}
-                    onClick={() => onChange(attr.name, option)}
-                    className={`flex h-10 items-center gap-2 rounded-lg border-2 px-4 text-sm font-semibold transition-colors ${
-                      isSelected
-                        ? "border-brand-orange-500 bg-brand-orange-500/10 text-brand-orange-500"
-                        : "border-surface-muted text-ink hover:border-ink-light"
-                    }`}
-                  >
-                    {option}
-                  </button>
-                ) : (
-                  <button
-                    key={option}
-                    onClick={() => onChange(attr.name, option)}
-                    className={`rounded-lg border-2 px-4 py-2 text-sm font-semibold transition-colors ${
-                      isSelected
-                        ? "border-brand-orange-500 bg-brand-orange-500/10 text-brand-orange-500"
-                        : "border-surface-muted text-ink hover:border-ink-light"
-                    }`}
-                  >
-                    {option}
-                  </button>
-                );
-              })}
-            </div>
+
+            {attr.slug === "pa_color" || attrKey.toLowerCase().includes("color") ? (
+              <div className="flex flex-wrap gap-2">
+                {attr.options.map((opt) => {
+                  const isAvailable = available.includes(opt);
+                  const isSelected = selected[attrKey] === opt;
+                  return (
+                    <button
+                      key={opt}
+                      disabled={!isAvailable}
+                      onClick={() => onChange(attrKey, opt)}
+                      className={cn(
+                        "flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all",
+                        isSelected
+                          ? "border-[#FF5722] ring-2 ring-[#FF5722]/30 scale-110"
+                          : "border-gray-200 hover:border-gray-400",
+                        !isAvailable && "opacity-30 cursor-not-allowed"
+                      )}
+                      title={opt}
+                      aria-label={opt}
+                    >
+                      <span
+                        className="h-6 w-6 rounded-full"
+                        style={{ backgroundColor: opt.toLowerCase() }}
+                      />
+                    </button>
+                  );
+                })}
+              </div>
+            ) : (
+              <div className="flex flex-wrap gap-2">
+                {attr.options.map((opt) => {
+                  const isAvailable = available.includes(opt);
+                  const isSelected = selected[attrKey] === opt;
+                  return (
+                    <button
+                      key={opt}
+                      disabled={!isAvailable}
+                      onClick={() => onChange(attrKey, opt)}
+                      className={cn(
+                        "rounded-lg border px-4 py-2 text-sm font-medium transition-all",
+                        isSelected
+                          ? "border-[#FF5722] bg-[#FF5722]/10 text-[#FF5722]"
+                          : "border-gray-200 text-[#1C1C2E] hover:border-gray-400",
+                        !isAvailable && "opacity-30 cursor-not-allowed"
+                      )}
+                    >
+                      {opt}
+                    </button>
+                  );
+                })}
+              </div>
+            )}
           </div>
         );
       })}

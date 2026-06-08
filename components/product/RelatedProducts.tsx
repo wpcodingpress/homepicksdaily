@@ -1,14 +1,12 @@
 import { getProducts } from "@/lib/woocommerce";
-import ProductGrid from "./ProductGrid";
+import ProductCard from "./ProductCard";
 
 interface RelatedProductsProps {
   relatedIds: number[];
 }
 
-export default async function RelatedProducts({
-  relatedIds,
-}: RelatedProductsProps) {
-  if (relatedIds.length === 0) return null;
+export default async function RelatedProducts({ relatedIds }: RelatedProductsProps) {
+  if (!relatedIds || relatedIds.length === 0) return null;
 
   const { products } = await getProducts({
     include: relatedIds.slice(0, 4).join(","),
@@ -18,11 +16,15 @@ export default async function RelatedProducts({
   if (products.length === 0) return null;
 
   return (
-    <section className="mt-16">
-      <h2 className="mb-6 font-heading text-2xl font-bold text-ink">
+    <div className="mt-16">
+      <h2 className="mb-6 font-heading text-2xl font-bold text-[#1C1C2E]">
         Related Products
       </h2>
-      <ProductGrid products={products} />
-    </section>
+      <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} />
+        ))}
+      </div>
+    </div>
   );
 }

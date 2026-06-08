@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { cn } from "@/lib/utils";
+import { ChevronLeft, ChevronRight } from "lucide-react";
 
 interface PaginationProps {
   currentPage: number;
@@ -43,29 +43,26 @@ export default function Pagination({
       {currentPage > 1 && (
         <Link
           href={buildHref(currentPage - 1)}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-surface-muted text-ink-muted transition-colors hover:bg-surface-muted"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition-colors hover:bg-gray-100"
         >
-          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 19l-7-7 7-7" />
-          </svg>
+          <ChevronLeft className="w-5 h-5" />
         </Link>
       )}
 
       {pages.map((p, i) =>
         p === "..." ? (
-          <span key={`ellipsis-${i}`} className="px-2 text-ink-light">
+          <span key={`ellipsis-${i}`} className="px-2 text-gray-400">
             ...
           </span>
         ) : (
           <Link
             key={p}
             href={buildHref(p)}
-            className={cn(
-              "flex h-10 w-10 items-center justify-center rounded-lg text-sm font-semibold transition-colors",
+            className={`flex h-10 w-10 items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
               p === currentPage
-                ? "bg-brand-orange-500 text-white"
-                : "border border-surface-muted text-ink-muted hover:bg-surface-muted"
-            )}
+                ? "bg-[#FF5722] text-white"
+                : "border border-gray-200 text-gray-500 hover:bg-gray-100"
+            }`}
           >
             {p}
           </Link>
@@ -75,11 +72,9 @@ export default function Pagination({
       {currentPage < totalPages && (
         <Link
           href={buildHref(currentPage + 1)}
-          className="flex h-10 w-10 items-center justify-center rounded-lg border border-surface-muted text-ink-muted transition-colors hover:bg-surface-muted"
+          className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-gray-500 transition-colors hover:bg-gray-100"
         >
-          <svg className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-          </svg>
+          <ChevronRight className="w-5 h-5" />
         </Link>
       )}
     </nav>

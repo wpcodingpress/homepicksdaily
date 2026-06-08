@@ -12,8 +12,10 @@ interface ImageWithFallbackProps {
   fill?: boolean;
   className?: string;
   fallbackClassName?: string;
-  preload?: boolean;
+  priority?: boolean;
 }
+
+const FALLBACK_IMG = "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80&auto=format&fit=crop";
 
 export default function ImageWithFallback({
   src,
@@ -23,44 +25,20 @@ export default function ImageWithFallback({
   fill,
   className,
   fallbackClassName,
-  preload,
+  priority,
 }: ImageWithFallbackProps) {
   const [error, setError] = useState(false);
-
-  if (error || !src) {
-    return (
-      <div
-        className={cn(
-          "flex items-center justify-center bg-surface-muted text-ink-light",
-          fill && "absolute inset-0 h-full w-full",
-          fallbackClassName
-        )}
-      >
-        <svg
-          className="h-12 w-12 opacity-40"
-          fill="none"
-          viewBox="0 0 24 24"
-          stroke="currentColor"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth={1.5}
-            d="M2.25 15.75l5.159-5.159a2.25 2.25 0 013.182 0l5.159 5.159m-1.5-1.5l1.409-1.409a2.25 2.25 0 013.182 0l2.909 2.909M3.75 21h16.5A2.25 2.25 0 0022.5 18.75V5.25A2.25 2.25 0 0020.25 3H3.75A2.25 2.25 0 001.5 5.25v13.5A2.25 2.25 0 003.75 21z"
-          />
-        </svg>
-      </div>
-    );
-  }
+  const imgSrc = error || !src ? FALLBACK_IMG : src;
 
   return (
     <Image
-      src={src}
+      src={imgSrc}
       alt={alt}
       width={!fill ? width : undefined}
       height={!fill ? height : undefined}
       fill={fill}
-      preload={preload}
+      priority={priority}
+      loading={priority ? undefined : "lazy"}
       className={cn("object-cover", className)}
       onError={() => setError(true)}
     />

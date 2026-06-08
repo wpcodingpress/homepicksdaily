@@ -1,24 +1,25 @@
+import type { ReactNode } from "react";
 import { cn } from "@/lib/utils";
 
 interface BadgeProps {
-  variant?: "sale" | "new" | "outofstock" | "default";
-  children: React.ReactNode;
+  children: ReactNode;
+  variant?: "sale" | "featured" | "outofstock" | "default";
   className?: string;
 }
 
-const variantStyles = {
-  sale: "bg-brand-orange-500 text-white",
-  new: "bg-brand-blue-500 text-white",
-  outofstock: "bg-ink-light text-white",
-  default: "bg-surface-muted text-ink-muted",
+const variants: Record<string, string> = {
+  sale: "bg-[#FF5722] text-white",
+  featured: "bg-[#00BCD4] text-white",
+  outofstock: "bg-gray-500 text-white",
+  default: "bg-gray-100 text-[#6B7280]",
 };
 
-export default function Badge({ variant = "default", children, className }: BadgeProps) {
+export default function Badge({ children, variant = "default", className }: BadgeProps) {
   return (
     <span
       className={cn(
-        "inline-block rounded-md px-2.5 py-1 text-xs font-bold uppercase tracking-wide",
-        variantStyles[variant],
+        "inline-block rounded-full px-2.5 py-1 text-[10px] font-bold uppercase tracking-wide",
+        variants[variant],
         className
       )}
     >

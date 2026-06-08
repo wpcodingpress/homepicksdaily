@@ -1,5 +1,7 @@
 "use client";
 
+import Link from "next/link";
+
 export default function Error({
   error,
   reset,
@@ -9,18 +11,26 @@ export default function Error({
 }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-6 py-32 px-4 text-center">
-      <h2 className="font-heading text-2xl font-bold text-ink">
+      <h1 className="font-heading text-4xl font-bold text-[#1C1C2E]">
         Something went wrong
-      </h2>
-      <p className="max-w-md text-ink-muted">
-        {error.message || "An unexpected error occurred. Please try again."}
+      </h1>
+      <p className="max-w-md text-[#6B7280]">
+        {error.message || "An unexpected error occurred."}
       </p>
-      <button
-        onClick={reset}
-        className="rounded-lg bg-brand-orange-500 px-6 py-3 font-semibold text-white transition-colors hover:bg-brand-orange-600"
-      >
-        Try again
-      </button>
+      <div className="flex gap-3">
+        <button
+          onClick={reset}
+          className="rounded-xl bg-[#FF5722] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#FF7043]"
+        >
+          Try again
+        </button>
+        <Link
+          href="/"
+          className="rounded-xl border-2 border-gray-200 px-6 py-3 font-semibold text-[#1C1C2E] transition-colors hover:bg-gray-50"
+        >
+          Go home
+        </Link>
+      </div>
     </div>
   );
 }

@@ -1,6 +1,5 @@
 "use client";
 
-import Image from "next/image";
 import { formatPrice } from "@/lib/utils";
 import type { CartItem } from "@/lib/types";
 
@@ -9,52 +8,48 @@ interface OrderSummaryProps {
 }
 
 export default function OrderSummary({ items }: OrderSummaryProps) {
-  const subtotal = items.reduce((s, i) => s + i.price * i.quantity, 0);
+  const subtotal = items.reduce((sum, i) => sum + i.price * i.quantity, 0);
   const shipping = subtotal >= 49 ? 0 : 5.99;
 
   return (
-    <div className="rounded-xl bg-surface-light p-6">
-      <h3 className="mb-4 font-heading text-lg font-bold text-ink">
+    <div className="rounded-2xl bg-white p-6 shadow-lg">
+      <h3 className="mb-4 font-heading text-lg font-bold text-[#1C1C2E]">
         Order Summary
       </h3>
 
-      <ul className="space-y-3">
+      <div className="space-y-3">
         {items.map((item) => (
-          <li key={`${item.id}-${item.variationId ?? ""}`} className="flex gap-3">
-            <div className="relative h-14 w-14 flex-shrink-0 overflow-hidden rounded-lg bg-surface-muted">
-              <Image
-                src={item.image || "/images/product-placeholder.jpg"}
-                alt={item.name}
-                fill
-                className="object-cover"
-              />
+          <div key={`${item.id}-${item.variationId}`} className="flex items-center justify-between text-sm">
+            <div className="flex-1">
+              <p className="font-medium text-[#1C1C2E] line-clamp-1">{item.name}</p>
+              <p className="text-xs text-[#6B7280]">Qty: {item.quantity}</p>
             </div>
-            <div className="flex-1 min-w-0">
-              <p className="text-sm font-semibold text-ink truncate">
-                {item.name}
-              </p>
-              {item.color && (
-                <p className="text-xs text-ink-muted">{item.color}</p>
-              )}
-              <div className="flex justify-between text-sm text-ink-muted">
-                <span>Qty: {item.quantity}</span>
-                <span>{formatPrice(item.price * item.quantity)}</span>
-              </div>
-            </div>
-          </li>
+            <span className="font-semibold text-[#1C1C2E]">
+              {formatPrice(item.price * item.quantity)}
+            </span>
+          </div>
         ))}
-      </ul>
+      </div>
 
-      <div className="mt-4 space-y-2 border-t border-surface-muted pt-4 text-sm">
-        <div className="flex justify-between text-ink-muted">
-          <span>Subtotal</span>
+      <div className="mt-4 space-y-3 border-t border-gray-100 pt-4 text-sm">
+        <div className="flex justify-between text-[#6B7280]">
+          <span>Subtotal ({items.length} items)</span>
           <span>{formatPrice(subtotal)}</span>
         </div>
-        <div className="flex justify-between text-ink-muted">
+        <div className="flex justify-between text-[#6B7280]">
           <span>Shipping</span>
-          <span>{shipping === 0 ? "Free" : formatPrice(shipping)}</span>
+          <span>
+            {shipping === 0 ? (
+              <span className="text-[#4CAF50]">Free</span>
+            ) : (
+              formatPrice(shipping)
+            )}
+          </span>
         </div>
-        <div className="flex justify-between font-bold text-ink text-base pt-2 border-t border-surface-muted">
+      </div>
+
+      <div className="mt-4 border-t border-gray-100 pt-4">
+        <div className="flex justify-between text-lg font-bold text-[#1C1C2E]">
           <span>Total</span>
           <span>{formatPrice(subtotal + shipping)}</span>
         </div>

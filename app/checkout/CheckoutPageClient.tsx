@@ -5,8 +5,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { z } from "zod";
 import { useState } from "react";
 import Link from "next/link";
+import { CreditCard, ChevronRight } from "lucide-react";
 import { useCartStore } from "@/lib/cart";
-import { formatPrice } from "@/lib/utils";
 import OrderSummary from "@/components/checkout/OrderSummary";
 
 const billingSchema = z.object({
@@ -74,12 +74,12 @@ export default function CheckoutPageClient() {
   if (items.length === 0 && status !== "redirecting") {
     return (
       <div className="mx-auto max-w-2xl px-4 py-24 text-center">
-        <h1 className="font-heading text-2xl font-bold text-ink">
+        <h1 className="font-heading text-2xl font-bold text-[#1C1C2E]">
           Your cart is empty
         </h1>
         <Link
           href="/shop"
-          className="mt-4 inline-block rounded-lg bg-brand-orange-500 px-6 py-3 font-bold text-white"
+          className="mt-4 inline-block rounded-lg bg-[#FF5722] px-6 py-3 font-bold text-white"
         >
           Shop Now
         </Link>
@@ -89,7 +89,15 @@ export default function CheckoutPageClient() {
 
   return (
     <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-      <h1 className="mb-8 font-heading text-3xl font-bold text-ink">
+      <div className="mb-6 flex items-center gap-2 text-sm text-[#6B7280]">
+        <Link href="/" className="transition-colors hover:text-[#1C1C2E]">Home</Link>
+        <ChevronRight className="w-4 h-4" />
+        <Link href="/cart" className="transition-colors hover:text-[#1C1C2E]">Cart</Link>
+        <ChevronRight className="w-4 h-4" />
+        <span className="text-[#1C1C2E]">Checkout</span>
+      </div>
+
+      <h1 className="mb-8 font-heading text-3xl font-bold text-[#1C1C2E]">
         Checkout
       </h1>
 
@@ -98,143 +106,46 @@ export default function CheckoutPageClient() {
           onSubmit={handleSubmit(onSubmit)}
           className="lg:col-span-3 space-y-6"
         >
-          <div className="rounded-xl bg-surface-light p-6">
-            <h2 className="mb-4 font-heading text-lg font-bold text-ink">
-              Billing Details
+          <div className="rounded-2xl bg-white p-6 shadow-lg">
+            <h2 className="mb-4 border-l-4 border-[#FF5722] pl-3 font-heading text-lg font-bold text-[#1C1C2E]">
+              Billing Information
             </h2>
 
             <div className="grid gap-4 sm:grid-cols-2">
-              <div>
-                <label className="mb-1 block text-sm font-medium text-ink">
-                  First Name *
-                </label>
-                <input
-                  {...register("first_name")}
-                  className="w-full rounded-lg border border-surface-muted px-3 py-2.5 text-ink focus:ring-2 focus:ring-brand-orange-500"
-                />
-                {errors.first_name && (
-                  <p className="mt-1 text-xs text-error">
-                    {errors.first_name.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-medium text-ink">
-                  Last Name *
-                </label>
-                <input
-                  {...register("last_name")}
-                  className="w-full rounded-lg border border-surface-muted px-3 py-2.5 text-ink focus:ring-2 focus:ring-brand-orange-500"
-                />
-                {errors.last_name && (
-                  <p className="mt-1 text-xs text-error">
-                    {errors.last_name.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-medium text-ink">
-                  Email *
-                </label>
-                <input
-                  type="email"
-                  {...register("email")}
-                  className="w-full rounded-lg border border-surface-muted px-3 py-2.5 text-ink focus:ring-2 focus:ring-brand-orange-500"
-                />
-                {errors.email && (
-                  <p className="mt-1 text-xs text-error">
-                    {errors.email.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-medium text-ink">
-                  Phone *
-                </label>
-                <input
-                  type="tel"
-                  {...register("phone")}
-                  className="w-full rounded-lg border border-surface-muted px-3 py-2.5 text-ink focus:ring-2 focus:ring-brand-orange-500"
-                />
-                {errors.phone && (
-                  <p className="mt-1 text-xs text-error">
-                    {errors.phone.message}
-                  </p>
-                )}
-              </div>
-              <div className="sm:col-span-2">
-                <label className="mb-1 block text-sm font-medium text-ink">
-                  Address Line 1 *
-                </label>
-                <input
-                  {...register("address_1")}
-                  className="w-full rounded-lg border border-surface-muted px-3 py-2.5 text-ink focus:ring-2 focus:ring-brand-orange-500"
-                />
-                {errors.address_1 && (
-                  <p className="mt-1 text-xs text-error">
-                    {errors.address_1.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-medium text-ink">
-                  City *
-                </label>
-                <input
-                  {...register("city")}
-                  className="w-full rounded-lg border border-surface-muted px-3 py-2.5 text-ink focus:ring-2 focus:ring-brand-orange-500"
-                />
-                {errors.city && (
-                  <p className="mt-1 text-xs text-error">
-                    {errors.city.message}
-                  </p>
-                )}
-              </div>
-              <div>
-                <label className="mb-1 block text-sm font-medium text-ink">
-                  Postcode *
-                </label>
-                <input
-                  {...register("postcode")}
-                  className="w-full rounded-lg border border-surface-muted px-3 py-2.5 text-ink focus:ring-2 focus:ring-brand-orange-500"
-                />
-                {errors.postcode && (
-                  <p className="mt-1 text-xs text-error">
-                    {errors.postcode.message}
-                  </p>
-                )}
-              </div>
-              <div className="sm:col-span-2">
-                <label className="mb-1 block text-sm font-medium text-ink">
-                  Country *
-                </label>
-                <input
-                  {...register("country")}
-                  className="w-full rounded-lg border border-surface-muted px-3 py-2.5 text-ink focus:ring-2 focus:ring-brand-orange-500"
-                />
-                {errors.country && (
-                  <p className="mt-1 text-xs text-error">
-                    {errors.country.message}
-                  </p>
-                )}
-              </div>
+              {(["first_name", "last_name", "email", "phone", "address_1", "city", "postcode", "country"] as const).map((field) => (
+                <div key={field} className={field === "address_1" || field === "country" ? "sm:col-span-2" : ""}>
+                  <label className="mb-1 block text-sm font-medium text-[#1C1C2E]">
+                    {field.replace(/_/g, " ").replace(/\b\w/g, (l) => l.toUpperCase())} *
+                  </label>
+                  <input
+                    {...register(field)}
+                    className="w-full rounded-xl border border-gray-200 px-4 py-2.5 text-[#1C1C2E] outline-none transition-all focus:border-[#FF5722] focus:ring-1 focus:ring-[#FF5722]"
+                  />
+                  {errors[field] && (
+                    <p className="mt-1 text-xs text-red-500">
+                      {errors[field].message}
+                    </p>
+                  )}
+                </div>
+              ))}
             </div>
           </div>
 
           <button
             type="submit"
             disabled={status === "loading" || status === "redirecting"}
-            className="w-full rounded-lg bg-brand-orange-500 py-3.5 text-base font-bold text-white transition-colors hover:bg-brand-orange-600 disabled:opacity-60"
+            className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF5722] py-3.5 text-base font-bold text-white transition-all hover:bg-[#FF7043] disabled:opacity-60"
           >
+            <CreditCard className="w-5 h-5" />
             {status === "loading"
               ? "Processing..."
               : status === "redirecting"
                 ? "Redirecting to PayPal..."
-                : "Place Order via PayPal"}
+                : "Place Order & Pay with PayPal"}
           </button>
 
           {error && (
-            <p className="rounded-lg bg-error/10 p-3 text-sm text-error">
+            <p className="rounded-lg bg-red-50 p-3 text-sm text-red-500">
               {error}
             </p>
           )}

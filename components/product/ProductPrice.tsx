@@ -20,23 +20,23 @@ export default function ProductPrice({
   if (type === "variable" && priceHtml) {
     const min = priceHtml.match(/[\d.]+/g)?.[0] ?? "0";
     return (
-      <p className="text-sm font-bold text-brand-orange-500">
+      <p className="text-sm font-bold text-[#FF5722]">
         From {formatPrice(min)}
       </p>
     );
   }
 
   if (!price) {
-    return <p className="text-sm text-ink-muted">Price unavailable</p>;
+    return <p className="text-sm text-[#6B7280]">Price unavailable</p>;
   }
 
   if (onSale && salePrice) {
     return (
       <div className="flex items-center gap-2">
-        <p className="text-sm font-bold text-brand-orange-500">
+        <p className="text-2xl font-bold text-[#FF5722]">
           {formatPrice(salePrice)}
         </p>
-        <p className="text-xs text-ink-light line-through">
+        <p className="text-sm text-gray-400 line-through">
           {formatPrice(regularPrice)}
         </p>
       </div>
@@ -44,7 +44,7 @@ export default function ProductPrice({
   }
 
   return (
-    <p className="text-sm font-bold text-ink">
+    <p className="text-2xl font-bold text-[#1C1C2E]">
       {formatPrice(price)}
     </p>
   );

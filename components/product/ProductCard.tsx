@@ -1,7 +1,7 @@
 import Link from "next/link";
-import ImageWithFallback from "@/components/ui/ImageWithFallback";
-import Badge from "@/components/ui/Badge";
-import { truncateTitle } from "@/lib/utils";
+import Image from "next/image";
+import { Star, Heart, ShoppingCart, ChevronRight } from "lucide-react";
+import { extractMinPrice } from "@/lib/utils";
 import type { WCProduct } from "@/lib/types";
 
 interface ProductCardProps {
@@ -10,94 +10,88 @@ interface ProductCardProps {
 
 export default function ProductCard({ product }: ProductCardProps) {
   const imageUrl =
-    product.images?.[0]?.src ?? "/images/product-placeholder.jpg";
-
-  const priceDisplay = () => {
-    if (product.type === "variable" && product.price_html) {
-      const min = product.price_html.match(/[\d.]+/g)?.[0] ?? "0";
-      return (
-        <p className="text-sm font-bold text-brand-blue">
-          <span className="text-brand-orange">From</span> ${min}
-        </p>
-      );
-    }
-    if (product.on_sale && product.sale_price) {
-      return (
-        <div className="flex items-center gap-2">
-          <p className="text-sm font-bold text-brand-orange">
-            ${parseFloat(product.sale_price).toFixed(2)}
-          </p>
-          <p className="text-xs text-ink-light line-through">
-            ${parseFloat(product.regular_price).toFixed(2)}
-          </p>
-        </div>
-      );
-    }
-    if (product.price) {
-      return (
-        <p className="text-sm font-bold text-brand-blue">
-          ${parseFloat(product.price).toFixed(2)}
-        </p>
-      );
-    }
-    return <p className="text-sm text-ink-muted">Price unavailable</p>;
-  };
+    product.images?.[0]?.src ??
+    "https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80&auto=format&fit=crop";
 
   return (
-    <Link
-      href={`/shop/${product.slug}`}
-      className="group flex flex-col rounded-2xl border border-[rgba(10,37,64,0.08)] bg-white shadow-[0_2px_12px_rgba(10,37,64,0.06)] transition-all duration-300 hover:-translate-y-1.5 hover:shadow-[0_12px_40px_rgba(10,37,64,0.15)]"
-    >
-      <div className="relative aspect-square overflow-hidden rounded-t-2xl bg-surface-light">
-        <ImageWithFallback
+    <article className="group relative rounded-2xl border border-gray-100 bg-white shadow-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-2xl">
+      <div className="relative aspect-square overflow-hidden rounded-t-2xl bg-gray-50">
+        <Image
           src={imageUrl}
           alt={product.name}
           fill
-          className="object-cover transition-transform duration-500 group-hover:scale-105"
+          className="object-cover transition-transform duration-500 group-hover:scale-110"
+          loading="lazy"
         />
+
         {product.on_sale && (
-          <Badge variant="sale" className="absolute left-3 top-3">
+          <span className="absolute left-3 top-3 rounded-full bg-[#FF5722] px-2 py-1 text-xs font-bold text-white">
             SALE
-          </Badge>
+          </span>
         )}
-        {product.stock_status === "outofstock" && (
-          <Badge variant="outofstock" className="absolute left-3 top-3">
-            OUT OF STOCK
-          </Badge>
+        {product.featured && !product.on_sale && (
+          <span className="absolute left-3 top-3 rounded-full bg-[#00BCD4] px-2 py-1 text-xs font-bold text-white">
+            FEATURED
+          </span>
         )}
+
+        <button
+          className="absolute right-3 top-3 flex h-8 w-8 items-center justify-center rounded-full bg-white shadow-md opacity-0 transition-opacity duration-300 group-hover:opacity-100"
+          aria-label="Add to wishlist"
+        >
+          <Heart className="h-4 w-4 text-gray-400 transition-colors hover:text-red-500" />
+        </button>
 
         <div className="absolute bottom-0 left-0 right-0 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
-          <div className="flex items-center justify-center bg-brand-orange py-3 text-sm font-semibold text-white">
+          <Link
+            href={`/shop/${product.slug}`}
+            className="flex items-center justify-center gap-2 bg-[#FF5722] py-3 text-center text-sm font-semibold text-white"
+          >
+            <ShoppingCart className="h-4 w-4" />
             {product.type === "variable" ? "View Options" : "Add to Cart"}
-          </div>
+          </Link>
         </div>
       </div>
 
-      <div className="flex flex-1 flex-col gap-1.5 p-4">
-        {product.average_rating && parseFloat(product.average_rating) > 0 && (
-          <div className="flex items-center gap-1 text-xs text-ink-light">
-            <span className="text-brand-orange">
-              {"\u2B50".repeat(Math.round(parseFloat(product.average_rating)))}
-            </span>
-            <span>({product.rating_count})</span>
-          </div>
-        )}
+      <div className="p-4">
+        <div className="mb-2 flex items-center gap-1">
+          {[...Array(5)].map((_, i) => (
+            <Star
+              key={i}
+              className={`h-3 w-3 ${
+                i < Math.round(parseFloat(product.average_rating || "0"))
+                  ? "fill-[#FFC107] text-[#FFC107]"
+                  : "text-gray-200"
+              }`}
+            />
+          ))}
+          <span className="ml-1 text-xs text-gray-400">
+            ({product.rating_count || 0})
+          </span>
+        </div>
 
-        <h3 className="text-sm font-semibold text-ink line-clamp-2 leading-snug">
-          {truncateTitle(product.name)}
+        <h3 className="mb-2 line-clamp-2 min-h-[40px] text-sm font-semibold text-gray-900">
+          {product.name}
         </h3>
 
-        {priceDisplay()}
-
-        <div className="mt-auto flex items-center gap-2 pt-2">
-          <span className="rounded-lg bg-brand-orange/10 px-3 py-1.5 text-xs font-semibold text-brand-orange transition-colors group-hover:bg-brand-orange group-hover:text-white">
-            Add to Cart
-          </span>
-          <span className="text-xs font-medium text-brand-blue-light transition-colors hover:text-brand-orange">
-            View &rarr;
-          </span>
+        <div className="mt-auto flex items-center justify-between">
+          {product.type === "variable" ? (
+            <span className="text-base font-bold text-[#FF5722]">
+              From ${extractMinPrice(product.price_html)}
+            </span>
+          ) : (
+            <span className="text-base font-bold text-[#FF5722]">
+              ${parseFloat(product.price || "0").toFixed(2)}
+            </span>
+          )}
+          <Link
+            href={`/shop/${product.slug}`}
+            className="text-[#00BCD4] transition-colors hover:text-[#0097A7]"
+          >
+            <ChevronRight className="h-5 w-5" />
+          </Link>
         </div>
       </div>
-    </Link>
+    </article>
   );
 }

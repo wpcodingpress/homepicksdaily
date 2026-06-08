@@ -1,53 +1,42 @@
 "use client";
 
-import { useEffect, useState } from "react";
-import { cn } from "@/lib/utils";
+import { useState, useEffect } from "react";
+import { X } from "lucide-react";
 
 interface ToastProps {
   message: string;
   type?: "success" | "error" | "info";
-  show: boolean;
   onClose: () => void;
   duration?: number;
 }
 
-export default function Toast({
-  message,
-  type = "info",
-  show,
-  onClose,
-  duration = 3000,
-}: ToastProps) {
+const typeStyles: Record<string, string> = {
+  success: "bg-[#4CAF50] text-white",
+  error: "bg-red-500 text-white",
+  info: "bg-[#1C1C2E] text-white",
+};
+
+export default function Toast({ message, type = "info", onClose, duration = 4000 }: ToastProps) {
+  const [visible, setVisible] = useState(true);
+
   useEffect(() => {
-    if (show && duration > 0) {
-      const timer = setTimeout(onClose, duration);
-      return () => clearTimeout(timer);
-    }
-  }, [show, duration, onClose]);
-
-  if (!show) return null;
-
-  const bgMap = {
-    success: "bg-success",
-    error: "bg-error",
-    info: "bg-brand-blue-500",
-  };
+    const timer = setTimeout(() => {
+      setVisible(false);
+      setTimeout(onClose, 300);
+    }, duration);
+    return () => clearTimeout(timer);
+  }, [duration, onClose]);
 
   return (
-    <div className="fixed bottom-6 left-1/2 z-[60] -translate-x-1/2 animate-fade-in">
-      <div
-        className={cn(
-          "flex items-center gap-3 rounded-lg px-5 py-3 text-sm font-semibold text-white shadow-lg",
-          bgMap[type]
-        )}
-      >
-        {message}
-        <button onClick={onClose} className="text-white/70 hover:text-white">
-          <svg className="h-4 w-4" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-          </svg>
-        </button>
-      </div>
+    <div
+      className={`fixed bottom-6 right-6 z-50 flex items-center gap-3 rounded-xl px-5 py-3 shadow-2xl transition-all duration-300 ${
+        typeStyles[type]
+      } ${visible ? "translate-y-0 opacity-100" : "translate-y-4 opacity-0"}`}
+    >
+      <span className="text-sm font-medium">{message}</span>
+      <button onClick={() => { setVisible(false); setTimeout(onClose, 300); }} className="text-white/70 hover:text-white">
+        <X className="w-4 h-4" />
+      </button>
     </div>
   );
 }

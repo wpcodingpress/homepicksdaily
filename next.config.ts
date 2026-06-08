@@ -1,9 +1,6 @@
 import type { NextConfig } from "next";
 
 const nextConfig: NextConfig = {
-  turbopack: {
-    root: "C:\\Users\\Asus\\Documents\\GitHub\\homepicksdaily",
-  },
   images: {
     remotePatterns: [
       {
@@ -17,6 +14,14 @@ const nextConfig: NextConfig = {
       {
         protocol: "https",
         hostname: "ae01.alicdn.com",
+      },
+      {
+        protocol: "https",
+        hostname: "images.unsplash.com",
+      },
+      {
+        protocol: "https",
+        hostname: "plus.unsplash.com",
       },
     ],
   },
