@@ -1,16 +1,16 @@
-import Link from "next/link";
-import Image from "next/image";
-import { getCategories } from "@/lib/woocommerce";
-import { decodeHtml } from "@/lib/utils";
-import { ChevronRight } from "lucide-react";
+import Link from 'next/link';
+import Image from 'next/image';
+import { getCategories } from '@/lib/woocommerce';
+import { decodeHtml } from '@/lib/utils';
+import { ChevronRight } from 'lucide-react';
 
 const categoryImages: Record<string, string> = {
-  "kitchen-starter-kits": "https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80&auto=format&fit=crop",
-  "home-storage-organization": "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80&auto=format&fit=crop",
-  "home-garden": "https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80&auto=format&fit=crop",
-  "refill-solutions": "https://images.unsplash.com/photo-1563453392212-326f5e854473?w=600&q=80&auto=format&fit=crop",
-  "toys-hobbies": "https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=80&auto=format&fit=crop",
-  "kitchendining-bar": "https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80&auto=format&fit=crop",
+  'kitchen-starter-kits': 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80',
+  'home-storage-organization': 'https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80',
+  'home-garden': 'https://images.unsplash.com/photo-1416879595882-3373a0480b5b?w=600&q=80',
+  'refill-solutions': 'https://images.unsplash.com/photo-1563453392212-326f5e854473?w=600&q=80',
+  'toys-hobbies': 'https://images.unsplash.com/photo-1515488042361-ee00e0ddd4e4?w=600&q=80',
+  'kitchendining-bar': 'https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80',
 };
 
 export default async function FeaturedCategories() {
@@ -18,53 +18,50 @@ export default async function FeaturedCategories() {
   const display = categories.slice(0, 5);
 
   return (
-    <section className="bg-[#F5F5F5] py-16 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="mb-10 text-center">
-          <p className="text-xs font-bold uppercase tracking-[4px] text-[#00BCD4]">
-            Explore
-          </p>
-          <h2 className="mt-2 font-heading text-3xl font-extrabold text-[#1C1C2E] sm:text-4xl lg:text-5xl">
-            Shop by Category
-          </h2>
-          <p className="mt-3 text-[#6B7280]">
-            Curated collections for every room in your home
-          </p>
+    <section style={{ background: '#F1F5F9', padding: '5rem 0' }}>
+      <div className="container">
+        <div style={{ textAlign: 'center', marginBottom: '2.5rem' }}>
+          <span className="section-eyebrow">Explore</span>
+          <h2 className="section-title">Shop by Category</h2>
+          <p style={{ color: '#64748B', fontSize: '1.0625rem' }}>Curated collections for every room in your home</p>
         </div>
 
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(200px, 1fr))', gap: '1rem' }}>
           {display.map((cat, i) => {
             const isLarge = i === 0;
-            const imgSrc = categoryImages[cat.slug] || categoryImages["default"] || categoryImages["kitchen-starter-kits"];
+            const imgSrc = categoryImages[cat.slug] || 'https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=600&q=80';
             return (
-              <Link
-                key={cat.id}
-                href={`/category/${cat.slug}`}
-                className={`group relative overflow-hidden rounded-2xl transition-all duration-400 ${
-                  isLarge ? "sm:col-span-2 sm:row-span-2" : ""
-                }`}
-                style={{ minHeight: isLarge ? "320px" : "240px" }}
-              >
-                <Image
-                  src={imgSrc}
-                  alt={decodeHtml(cat.name)}
-                  fill
-                  className="object-cover transition-transform duration-500 group-hover:scale-110"
-                  loading="lazy"
-                />
-                <div className="absolute inset-0 bg-gradient-to-t from-[#1C1C2E]/90 via-[#1C1C2E]/20 to-transparent" />
-                <div className="absolute inset-0 flex flex-col justify-end p-6">
-                  <div className="flex items-center justify-between">
-                    <div>
-                      <h3 className="font-heading text-xl font-bold text-white sm:text-2xl">
-                        {decodeHtml(cat.name)}
-                      </h3>
-                      <p className="mt-1 text-sm text-white/70">
-                        {cat.count} product{cat.count !== 1 ? "s" : ""}
-                      </p>
-                    </div>
-                    <ChevronRight className="w-6 h-6 text-white opacity-0 transition-all group-hover:opacity-100 group-hover:translate-x-1" />
+              <Link key={cat.id} href={`/category/${cat.slug}`}
+                style={{
+                  position: 'relative',
+                  overflow: 'hidden',
+                  borderRadius: '1.25rem',
+                  minHeight: isLarge ? '320px' : '220px',
+                  gridColumn: isLarge ? 'span 2' : undefined,
+                  gridRow: isLarge ? 'span 2' : undefined,
+                  display: 'block',
+                  transition: 'all 0.4s ease',
+                }}>
+                <Image src={imgSrc} alt={decodeHtml(cat.name)} fill style={{ objectFit: 'cover', transition: 'transform 0.5s ease' }} loading="lazy" />
+                <div style={{
+                  position: 'absolute', inset: 0,
+                  background: 'linear-gradient(to top, rgba(15,15,26,0.85), rgba(15,15,26,0.1))',
+                  zIndex: 1,
+                }} />
+                <div style={{
+                  position: 'absolute', bottom: 0, left: 0, right: 0, zIndex: 2,
+                  padding: '1.5rem',
+                  display: 'flex', alignItems: 'flex-end', justifyContent: 'space-between',
+                }}>
+                  <div>
+                    <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: isLarge ? '1.5rem' : '1.125rem', color: 'white' }}>
+                      {decodeHtml(cat.name)}
+                    </h3>
+                    <p style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.7)', marginTop: '0.25rem' }}>
+                      {cat.count} product{cat.count !== 1 ? 's' : ''}
+                    </p>
                   </div>
+                  <ChevronRight size={20} color="white" style={{ opacity: 0, transition: 'all 0.3s ease' }} />
                 </div>
               </Link>
             );

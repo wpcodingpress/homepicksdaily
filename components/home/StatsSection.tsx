@@ -1,16 +1,15 @@
-"use client";
-
-import { useEffect, useRef, useState } from "react";
-import { Package, Users, MapPin, Star } from "lucide-react";
+'use client';
+import { useEffect, useRef, useState } from 'react';
+import { Package, Users, MapPin, Star } from 'lucide-react';
 
 const stats = [
-  { icon: <Package className="w-8 h-8" />, target: 500, suffix: "+", label: "Products" },
-  { icon: <Users className="w-8 h-8" />, target: 10000, suffix: "+", label: "Happy Customers" },
-  { icon: <MapPin className="w-8 h-8" />, target: 50, suffix: "+", label: "Countries Served" },
-  { icon: <Star className="w-8 h-8" />, target: 49, suffix: "★", label: "Average Rating", isDecimal: true },
+  { icon: Package, target: 500, suffix: '+', label: 'Products' },
+  { icon: Users, target: 10000, suffix: '+', label: 'Happy Customers' },
+  { icon: MapPin, target: 50, suffix: '+', label: 'Countries Served' },
+  { icon: Star, target: 49, suffix: '★', label: 'Average Rating', decimal: true },
 ];
 
-function CountUp({ target, suffix, isDecimal }: { target: number; suffix: string; isDecimal?: boolean }) {
+function CountUp({ target, suffix, decimal }: { target: number; suffix: string; decimal?: boolean }) {
   const [count, setCount] = useState(0);
   const ref = useRef<HTMLSpanElement>(null);
   const [started, setStarted] = useState(false);
@@ -18,62 +17,44 @@ function CountUp({ target, suffix, isDecimal }: { target: number; suffix: string
   useEffect(() => {
     const el = ref.current;
     if (!el) return;
-
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting && !started) {
-          setStarted(true);
-          observer.unobserve(el);
-        }
-      },
-      { threshold: 0.3 }
-    );
-
-    observer.observe(el);
-    return () => observer.disconnect();
+    const obs = new IntersectionObserver(([e]) => {
+      if (e.isIntersecting && !started) { setStarted(true); obs.unobserve(el); }
+    }, { threshold: 0.3 });
+    obs.observe(el);
+    return () => obs.disconnect();
   }, [started]);
 
   useEffect(() => {
     if (!started) return;
-
     const duration = 2000;
     const steps = 60;
-    const increment = target / steps;
-    let current = 0;
-    const timer = setInterval(() => {
-      current += increment;
-      if (current >= target) {
-        setCount(target);
-        clearInterval(timer);
-      } else {
-        setCount(Math.floor(current));
-      }
+    const inc = target / steps;
+    let cur = 0;
+    const t = setInterval(() => {
+      cur += inc;
+      if (cur >= target) { setCount(target); clearInterval(t); }
+      else setCount(Math.floor(cur));
     }, duration / steps);
-
-    return () => clearInterval(timer);
+    return () => clearInterval(t);
   }, [started, target]);
 
-  const display = isDecimal ? (count / 10).toFixed(1) : count;
+  const display = decimal ? (count / 10).toFixed(1) : count;
 
-  return (
-    <span ref={ref} className="font-heading text-5xl font-black text-[#FF5722] md:text-6xl">
-      {display}{suffix}
-    </span>
-  );
+  return <span ref={ref} style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 900, color: '#FF5722' }}>{display}{suffix}</span>;
 }
 
 export default function StatsSection() {
   return (
-    <section className="bg-[#1C1C2E] py-16 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          {stats.map((stat) => (
-            <div key={stat.label} className="text-center">
-              <div className="mx-auto mb-4 flex justify-center text-[#00BCD4]">
-                {stat.icon}
+    <section style={{ background: '#0F0F1A', padding: '5rem 0' }}>
+      <div className="container">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '2rem' }}>
+          {stats.map(s => (
+            <div key={s.label} style={{ textAlign: 'center' }}>
+              <div style={{ color: '#00BCD4', marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
+                <s.icon size={32} />
               </div>
-              <CountUp target={stat.target} suffix={stat.suffix} isDecimal={stat.isDecimal} />
-              <p className="mt-2 text-base text-white/70">{stat.label}</p>
+              <CountUp target={s.target} suffix={s.suffix} decimal={s.decimal} />
+              <p style={{ marginTop: '0.5rem', color: 'rgba(255,255,255,0.7)', fontSize: '0.9375rem' }}>{s.label}</p>
             </div>
           ))}
         </div>

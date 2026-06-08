@@ -1,55 +1,39 @@
-"use client";
-
-import { Leaf, Truck, Shield, Award, ArrowRight } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+'use client';
+import { Leaf, Truck, Shield, Award, ArrowRight } from 'lucide-react';
 
 const values = [
-  {
-    icon: <Leaf className="w-6 h-6" />,
-    title: "100% Eco-Friendly",
-    description: "Every product meets our strict sustainability standards",
-  },
-  {
-    icon: <Truck className="w-6 h-6" />,
-    title: "Express Delivery",
-    description: "Same-day dispatch. Tracked worldwide with full insurance",
-  },
-  {
-    icon: <Shield className="w-6 h-6" />,
-    title: "Buyer Protection",
-    description: "Shop with PayPal. Full purchase protection on every order",
-  },
-  {
-    icon: <Award className="w-6 h-6" />,
-    title: "Quality Promise",
-    description: "30-day no-questions guarantee. We stand by every product",
-  },
+  { icon: Leaf, title: '100% Eco-Friendly', desc: 'Every product meets our strict sustainability standards for a greener home.' },
+  { icon: Truck, title: 'Express Delivery', desc: 'Same-day dispatch with tracked worldwide shipping and full insurance.' },
+  { icon: Shield, title: 'Buyer Protection', desc: 'Shop with confidence — PayPal protection on every single order.' },
+  { icon: Award, title: 'Quality Promise', desc: '30-day no-questions guarantee. We stand behind every product we sell.' },
 ];
 
 export default function ValuePropositions() {
-  const ref = useScrollReveal<HTMLDivElement>();
-
   return (
-    <section className="bg-white py-16 sm:py-20">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-        <div ref={ref} className="reveal grid gap-6 sm:grid-cols-2 lg:grid-cols-4">
-          {values.map((v) => (
-            <div
-              key={v.title}
-              className="group cursor-pointer rounded-2xl bg-[#FAFAFA] p-6 text-center transition-all duration-300 hover:-translate-y-2 hover:shadow-xl"
-            >
-              <div className="mx-auto flex h-14 w-14 items-center justify-center rounded-full bg-[#00BCD4]/10 text-[#00BCD4] transition-all duration-300 group-hover:bg-[#FF5722] group-hover:text-white">
-                {v.icon}
+    <section style={{ background: '#FFFFFF', padding: '5rem 0' }}>
+      <div className="container">
+        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(240px, 1fr))', gap: '1.5rem' }}>
+          {values.map(({ icon: Icon, title, desc }) => (
+            <div key={title} className="card" style={{ padding: '2rem', textAlign: 'center', cursor: 'pointer' }}>
+              <div style={{
+                width: '56px', height: '56px', borderRadius: '50%',
+                background: 'rgba(0,188,212,0.1)', color: '#00BCD4',
+                display: 'flex', alignItems: 'center', justifyContent: 'center',
+                margin: '0 auto 1.25rem',
+                transition: 'all 0.3s ease',
+              }}>
+                <Icon size={24} />
               </div>
-              <h3 className="mt-4 font-heading text-lg font-bold text-[#1C1C2E]">
-                {v.title}
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.125rem', color: '#0F0F1A', marginBottom: '0.5rem' }}>
+                {title}
               </h3>
-              <p className="mt-2 text-sm leading-relaxed text-[#6B7280]">
-                {v.description}
-              </p>
-              <span className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[#FF5722] opacity-0 transition-opacity group-hover:opacity-100">
-                Learn more
-                <ArrowRight className="w-4 h-4" />
+              <p style={{ fontSize: '0.875rem', color: '#64748B', lineHeight: 1.7 }}>{desc}</p>
+              <span style={{
+                display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
+                marginTop: '0.75rem', fontSize: '0.8125rem', fontWeight: 600,
+                color: '#FF5722',
+              }}>
+                Learn more <ArrowRight size={14} />
               </span>
             </div>
           ))}

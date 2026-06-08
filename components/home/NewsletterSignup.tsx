@@ -1,75 +1,58 @@
-"use client";
-
-import { useState } from "react";
-import { Mail, ArrowRight } from "lucide-react";
-import { useScrollReveal } from "@/hooks/useScrollReveal";
+'use client';
+import { useState } from 'react';
+import { Mail, ArrowRight } from 'lucide-react';
 
 export default function NewsletterSignup() {
-  const [email, setEmail] = useState("");
+  const [email, setEmail] = useState('');
   const [submitted, setSubmitted] = useState(false);
-  const ref = useScrollReveal<HTMLDivElement>();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (email) {
-      setSubmitted(true);
-      setEmail("");
-    }
+    if (email) { setSubmitted(true); setEmail(''); }
   };
 
   return (
-    <section className="relative overflow-hidden bg-[#1C1C2E] py-16 sm:py-20">
-      <div
-        className="pointer-events-none absolute -right-[100px] -top-[100px] h-[400px] w-[400px] rounded-full opacity-10 blur-[60px]"
-        style={{ background: "#00BCD4" }}
-      />
-      <div
-        className="pointer-events-none absolute -bottom-[100px] -left-[100px] h-[400px] w-[400px] rounded-full opacity-10 blur-[60px]"
-        style={{ background: "#FF5722" }}
-      />
+    <section style={{ position: 'relative', overflow: 'hidden', background: '#0F0F1A', padding: '5rem 0' }}>
+      {/* Decorative blurs */}
+      <div style={{ position: 'absolute', right: '-100px', top: '-100px', width: '400px', height: '400px', borderRadius: '50%', background: '#00BCD4', opacity: 0.08, filter: 'blur(60px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', left: '-100px', bottom: '-100px', width: '400px', height: '400px', borderRadius: '50%', background: '#FF5722', opacity: 0.08, filter: 'blur(60px)', pointerEvents: 'none' }} />
 
-      <div ref={ref} className="reveal relative mx-auto max-w-2xl px-4 text-center sm:px-6 lg:px-8">
-        <div className="mb-4 flex justify-center">
-          <Mail className="h-12 w-12 text-[#FF5722]" />
-        </div>
+      <div className="container">
+        <div style={{ maxWidth: '560px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
+          <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
+            <Mail size={48} color="#FF5722" />
+          </div>
 
-        <h2 className="font-heading text-3xl font-extrabold text-white sm:text-4xl lg:text-5xl">
-          Join 10,000+ Happy Homes
-        </h2>
-        <p className="mt-3 text-white/60">
-          Weekly deals, eco tips, and new arrivals. Zero spam.
-        </p>
-
-        {submitted ? (
-          <p className="mt-8 text-lg font-semibold text-[#FF5722]">
-            Thanks for subscribing! Check your inbox.
+          <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 800, color: 'white', lineHeight: 1.15, marginBottom: '0.75rem' }}>
+            Join 10,000+ Happy Homes
+          </h2>
+          <p style={{ color: 'rgba(255,255,255,0.6)', fontSize: '1.0625rem', marginBottom: '2rem' }}>
+            Weekly deals, eco tips, and new arrivals. Zero spam.
           </p>
-        ) : (
-          <form
-            onSubmit={handleSubmit}
-            className="mx-auto mt-8 flex max-w-md flex-col gap-3 sm:flex-row"
-          >
-            <input
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="Enter your email"
-              className="flex-1 rounded-lg border-0 px-5 py-3.5 text-sm text-[#1C1C2E] placeholder:text-gray-400 outline-none ring-1 ring-white/20 transition-all focus:ring-2 focus:ring-[#FF5722]"
-            />
-            <button
-              type="submit"
-              className="flex items-center justify-center gap-2 rounded-lg bg-[#FF5722] px-6 py-3.5 text-sm font-bold text-white transition-all hover:bg-[#FF7043] hover:shadow-[0_0_20px_rgba(255,87,34,0.4)]"
-            >
-              Subscribe
-              <ArrowRight className="w-4 h-4" />
-            </button>
-          </form>
-        )}
 
-        <p className="mt-4 text-xs text-white/30">
-          By subscribing you agree to our Privacy Policy
-        </p>
+          {submitted ? (
+            <p style={{ fontSize: '1.125rem', fontWeight: 700, color: '#FF5722' }}>Thanks for subscribing! Check your inbox.</p>
+          ) : (
+            <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '0.75rem', maxWidth: '440px', margin: '0 auto' }}>
+              <input type="email" required value={email} onChange={e => setEmail(e.target.value)}
+                placeholder="Enter your email"
+                style={{
+                  flex: 1, padding: '0.875rem 1.25rem', borderRadius: '0.625rem',
+                  border: 'none', outline: 'none', fontSize: '0.9375rem',
+                  fontFamily: 'var(--font-body)',
+                  background: 'rgba(255,255,255,0.1)', color: 'white',
+                }}
+              />
+              <button type="submit" className="btn btn-primary">
+                Subscribe <ArrowRight size={16} />
+              </button>
+            </form>
+          )}
+
+          <p style={{ marginTop: '1rem', fontSize: '0.75rem', color: 'rgba(255,255,255,0.3)' }}>
+            By subscribing you agree to our Privacy Policy
+          </p>
+        </div>
       </div>
     </section>
   );

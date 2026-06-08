@@ -1,55 +1,48 @@
-import type { Metadata } from "next";
-import { getProducts } from "@/lib/woocommerce";
-import ProductGrid from "@/components/product/ProductGrid";
-import SearchForm from "./SearchForm";
-import { Search } from "lucide-react";
+import type { Metadata } from 'next';
+import { getProducts } from '@/lib/woocommerce';
+import ProductGrid from '@/components/product/ProductGrid';
+import SearchForm from './SearchForm';
+import { Search } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: "Search Results",
-  description: "Search our eco-friendly home product catalog.",
+  title: 'Search Results',
+  description: 'Search our eco-friendly home product catalog.',
 };
 
-interface SearchPageProps {
+interface Props {
   searchParams: Promise<{ q?: string }>;
 }
 
-export default async function SearchPage({ searchParams }: SearchPageProps) {
+export default async function SearchPage({ searchParams }: Props) {
   const { q } = await searchParams;
-
-  const { products } = q
-    ? await getProducts({ search: q, per_page: "20" })
-    : { products: [] };
+  const { products } = q ? await getProducts({ search: q, per_page: '20' }) : { products: [] };
 
   return (
-    <div className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
-      <div className="mb-8">
-        <h1 className="font-heading text-3xl font-extrabold text-[#1C1C2E]">
-          Search Results
-        </h1>
-        <p className="mt-2 text-[#6B7280]">
-          {q
-            ? `Showing results for "${q}"`
-            : "Enter a search term to find products"}
-        </p>
-      </div>
-
-      <div className="mb-12">
-        <SearchForm initialQuery={q || ""} />
-      </div>
-
-      {q && products.length === 0 ? (
-        <div className="py-16 text-center">
-          <Search className="mx-auto h-16 w-16 text-gray-300" />
-          <p className="mt-4 text-[#6B7280]">
-            No products found for &ldquo;{q}&rdquo;.
-          </p>
-          <p className="text-sm text-[#6B7280]">
-            Try adjusting your search terms.
+    <section style={{ padding: '3rem 0' }}>
+      <div className="container">
+        <div style={{ marginBottom: '2rem' }}>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#0F0F1A', marginBottom: '0.5rem' }}>
+            Search Results
+          </h1>
+          <p style={{ color: '#64748B' }}>
+            {q ? `Showing results for "${q}"` : 'Enter a search term to find products'}
           </p>
         </div>
-      ) : (
-        <ProductGrid products={products} />
-      )}
-    </div>
+
+        <div style={{ marginBottom: '3rem' }}>
+          <SearchForm initialQuery={q || ''} />
+        </div>
+
+        {q && products.length === 0 ? (
+          <div style={{ textAlign: 'center', padding: '4rem 0' }}>
+            <Search size={64} color="#CBD5E1" style={{ margin: '0 auto 1rem' }} />
+            <p style={{ color: '#64748B' }}>No products found for &ldquo;{q}&rdquo;.</p>
+            <p style={{ color: '#64748B', fontSize: '0.875rem' }}>Try adjusting your search terms.</p>
+          </div>
+        ) : (
+          <ProductGrid products={products} />
+        )}
+      </div>
+    </section>
   );
 }

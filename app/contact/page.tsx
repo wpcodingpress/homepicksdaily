@@ -1,100 +1,90 @@
-"use client";
-
-import { useState } from "react";
-import { Mail, Phone, MapPin, Clock, Send } from "lucide-react";
+'use client';
+import { useState } from 'react';
+import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
 
 const contactInfo = [
-  { icon: <Mail className="w-6 h-6" />, label: "Email", value: "support@homepicksdaily.com" },
-  { icon: <Phone className="w-6 h-6" />, label: "Phone", value: "+1 (555) 123-4567" },
-  { icon: <MapPin className="w-6 h-6" />, label: "Location", value: "Austin, TX, USA" },
-  { icon: <Clock className="w-6 h-6" />, label: "Hours", value: "Mon–Fri, 9am–6pm EST" },
+  { icon: Mail, label: 'Email', value: 'support@homepicksdaily.com' },
+  { icon: Phone, label: 'Phone', value: '+1 (555) 123-4567' },
+  { icon: MapPin, label: 'Location', value: 'Austin, TX, USA' },
+  { icon: Clock, label: 'Hours', value: 'Mon–Fri, 9am–6pm EST' },
 ];
 
 export default function ContactPage() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [sent, setSent] = useState(false);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    if (formData.name && formData.email && formData.message) {
-      setSent(true);
-      setFormData({ name: "", email: "", message: "" });
-    }
+    if (form.name && form.email && form.message) { setSent(true); setForm({ name: '', email: '', message: '' }); }
+  };
+
+  const inputStyle: React.CSSProperties = {
+    width: '100%', padding: '0.875rem 1rem', borderRadius: '0.75rem',
+    border: '1px solid #E2E8F0', fontSize: '0.9375rem',
+    fontFamily: 'var(--font-body)', outline: 'none',
+    transition: 'all 0.2s ease',
   };
 
   return (
     <>
-      <section className="bg-[#1C1C2E] py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <h1 className="font-heading text-4xl font-extrabold text-white sm:text-5xl">
+      {/* Hero */}
+      <section style={{ background: '#0F0F1A', padding: '5rem 0' }}>
+        <div className="container">
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, color: 'white', marginBottom: '1rem' }}>
             Contact Us
           </h1>
-          <p className="mt-4 max-w-2xl text-lg text-white/60">
-            Have a question? We&apos;d love to hear from you. Send us a message and we&apos;ll respond within 24 hours.
+          <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.6)', maxWidth: '560px' }}>
+            Have a question? We would love to hear from you. Send us a message and we will respond within 24 hours.
           </p>
         </div>
       </section>
 
-      <section className="py-16 sm:py-20">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="grid gap-12 lg:grid-cols-5">
-            <form onSubmit={handleSubmit} className="lg:col-span-3 space-y-5">
+      {/* Form + Info */}
+      <section style={{ padding: '5rem 0' }}>
+        <div className="container">
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
+            {/* Form */}
+            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
               <div>
-                <label className="mb-1 block text-sm font-medium text-[#1C1C2E]">Name *</label>
-                <input
-                  type="text"
-                  required
-                  value={formData.name}
-                  onChange={(e) => setFormData({ ...formData, name: e.target.value })}
-                  className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[#1C1C2E] outline-none transition-all focus:border-[#FF5722] focus:ring-1 focus:ring-[#FF5722]"
-                  placeholder="Your name"
-                />
+                <label style={{ display: 'block', fontWeight: 600, fontSize: '0.875rem', color: '#0F0F1A', marginBottom: '0.375rem' }}>Name *</label>
+                <input type="text" required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
+                  placeholder="Your name" style={inputStyle} />
               </div>
               <div>
-                <label className="mb-1 block text-sm font-medium text-[#1C1C2E]">Email *</label>
-                <input
-                  type="email"
-                  required
-                  value={formData.email}
-                  onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                  className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[#1C1C2E] outline-none transition-all focus:border-[#FF5722] focus:ring-1 focus:ring-[#FF5722]"
-                  placeholder="your@email.com"
-                />
+                <label style={{ display: 'block', fontWeight: 600, fontSize: '0.875rem', color: '#0F0F1A', marginBottom: '0.375rem' }}>Email *</label>
+                <input type="email" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
+                  placeholder="your@email.com" style={inputStyle} />
               </div>
               <div>
-                <label className="mb-1 block text-sm font-medium text-[#1C1C2E]">Message *</label>
-                <textarea
-                  required
-                  rows={5}
-                  value={formData.message}
-                  onChange={(e) => setFormData({ ...formData, message: e.target.value })}
-                  className="w-full rounded-xl border border-gray-200 px-4 py-3 text-[#1C1C2E] outline-none transition-all focus:border-[#FF5722] focus:ring-1 focus:ring-[#FF5722] resize-none"
-                  placeholder="How can we help?"
-                />
+                <label style={{ display: 'block', fontWeight: 600, fontSize: '0.875rem', color: '#0F0F1A', marginBottom: '0.375rem' }}>Message *</label>
+                <textarea required rows={5} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
+                  placeholder="How can we help?" style={{ ...inputStyle, resize: 'none' }} />
               </div>
-              <button
-                type="submit"
-                className="inline-flex items-center gap-2 rounded-xl bg-[#FF5722] px-8 py-3 font-bold text-white transition-all hover:bg-[#FF7043]"
-              >
-                <Send className="w-4 h-4" />
-                {sent ? "Message Sent!" : "Send Message"}
+              <button type="submit" className="btn btn-primary" style={{ alignSelf: 'flex-start' }}>
+                <Send size={16} />
+                {sent ? 'Message Sent!' : 'Send Message'}
               </button>
-              {sent && (
-                <p className="text-sm text-[#4CAF50] font-medium">
-                  Thanks for reaching out! We&apos;ll get back to you soon.
-                </p>
-              )}
+              {sent && <p style={{ color: '#10B981', fontWeight: 600, fontSize: '0.875rem' }}>Thanks for reaching out! We will get back to you soon.</p>}
             </form>
 
-            <div className="lg:col-span-2 space-y-4">
-              {contactInfo.map((info) => (
-                <div key={info.label} className="flex items-start gap-4 rounded-2xl bg-[#1C1C2E] p-5">
-                  <div className="flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-[#00BCD4]/20 text-[#00BCD4]">
-                    {info.icon}
+            {/* Info cards */}
+            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+              {contactInfo.map(info => (
+                <div key={info.label} style={{
+                  background: '#0F0F1A', borderRadius: '1rem', padding: '1.5rem',
+                  display: 'flex', alignItems: 'flex-start', gap: '1rem',
+                }}>
+                  <div style={{
+                    width: '48px', height: '48px', borderRadius: '50%',
+                    background: 'rgba(0,188,212,0.2)', color: '#00BCD4',
+                    display: 'flex', alignItems: 'center', justifyContent: 'center',
+                    flexShrink: 0,
+                  }}>
+                    <info.icon size={24} />
                   </div>
                   <div>
-                    <p className="text-sm font-medium text-white/60">{info.label}</p>
-                    <p className="font-semibold text-white">{info.value}</p>
+                    <p style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.5)', marginBottom: '0.25rem' }}>{info.label}</p>
+                    <p style={{ fontWeight: 600, color: 'white', fontSize: '0.9375rem' }}>{info.value}</p>
                   </div>
                 </div>
               ))}

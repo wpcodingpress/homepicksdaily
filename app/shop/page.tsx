@@ -1,50 +1,38 @@
-import { Suspense } from "react";
-import Link from "next/link";
-import type { Metadata } from "next";
-import { getProducts } from "@/lib/woocommerce";
-import ProductGrid from "@/components/product/ProductGrid";
-import ProductCardSkeleton from "@/components/ui/Skeleton";
-import ShopFilters from "@/components/shop/ShopFilters";
-import SortDropdown from "@/components/shop/SortDropdown";
-import ActiveFilterTags from "@/components/shop/ActiveFilterTags";
-import Pagination from "@/components/shop/Pagination";
-import { Home, ChevronRight } from "lucide-react";
+import { Suspense } from 'react';
+import Link from 'next/link';
+import type { Metadata } from 'next';
+import { getProducts } from '@/lib/woocommerce';
+import ProductGrid from '@/components/product/ProductGrid';
+import ProductCardSkeleton from '@/components/ui/Skeleton';
+import ShopFilters from '@/components/shop/ShopFilters';
+import SortDropdown from '@/components/shop/SortDropdown';
+import ActiveFilterTags from '@/components/shop/ActiveFilterTags';
+import Pagination from '@/components/shop/Pagination';
+import { Home, ChevronRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: "Shop All Products",
-  description: "Browse our full collection of eco-friendly home and cleaning products.",
+  title: 'Shop All Products',
+  description: 'Browse our full collection of eco-friendly home and cleaning products.',
 };
 
 interface ShopPageProps {
-  searchParams: Promise<{
-    page?: string;
-    category?: string;
-    orderby?: string;
-    min_price?: string;
-    max_price?: string;
-  }>;
+  searchParams: Promise<{ page?: string; category?: string; orderby?: string; min_price?: string; max_price?: string }>;
 }
 
 function SkeletonGrid() {
   return (
-    <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-      {Array.from({ length: 8 }).map((_, i) => (
-        <ProductCardSkeleton key={i} />
-      ))}
+    <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(220px, 1fr))', gap: '1rem' }}>
+      {Array.from({ length: 8 }).map((_, i) => <ProductCardSkeleton key={i} />)}
     </div>
   );
 }
 
 export default async function ShopPage({ searchParams }: ShopPageProps) {
   const sp = await searchParams;
-  const page = sp.page ?? "1";
-  const orderby = sp.orderby ?? "popularity";
+  const page = sp.page ?? '1';
+  const orderby = sp.orderby ?? 'popularity';
 
-  const params: Record<string, string> = {
-    page,
-    per_page: "20",
-    orderby,
-  };
+  const params: Record<string, string> = { page, per_page: '20', orderby };
   if (sp.category) params.category = sp.category;
   if (sp.min_price) params.min_price = sp.min_price;
   if (sp.max_price) params.max_price = sp.max_price;
@@ -53,46 +41,45 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
   return (
     <>
-      <section className="bg-[#1C1C2E] py-12">
-        <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
-          <div className="mb-2 flex items-center gap-2 text-sm text-white/60">
-            <Link href="/" className="transition-colors hover:text-white">
-              <Home className="w-4 h-4" />
-            </Link>
-            <ChevronRight className="w-4 h-4" />
-            <span className="text-white/90">Shop</span>
+      {/* Banner */}
+      <section style={{ background: '#0F0F1A', padding: '3rem 0' }}>
+        <div className="container">
+          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)', marginBottom: '0.75rem' }}>
+            <Link href="/" style={{ color: 'inherit' }}><Home size={16} /></Link>
+            <ChevronRight size={14} />
+            <span style={{ color: 'rgba(255,255,255,0.85)' }}>Shop</span>
           </div>
-          <h1 className="font-heading text-4xl font-extrabold text-white sm:text-5xl">
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', fontWeight: 800, color: 'white' }}>
             Our Products
           </h1>
         </div>
       </section>
 
-      <div className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
-        <div className="flex flex-col gap-6 lg:flex-row">
-          <div className="w-full lg:w-72 lg:flex-shrink-0">
-            <ShopFilters />
-          </div>
-
-          <div className="flex-1">
-            <div className="mb-4 flex items-center justify-between">
-              <ActiveFilterTags />
-              <SortDropdown />
+      {/* Content */}
+      <section style={{ padding: '2rem 0' }}>
+        <div className="container">
+          <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
+            {/* Filters + Sort */}
+            <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
+              <div style={{ flex: 1, minWidth: '200px' }}>
+                <ShopFilters />
+              </div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: '1rem', flexShrink: 0 }}>
+                <ActiveFilterTags />
+                <SortDropdown />
+              </div>
             </div>
 
+            {/* Grid */}
             <Suspense fallback={<SkeletonGrid />}>
               <ProductGrid products={products} />
             </Suspense>
 
-            <Pagination
-              currentPage={parseInt(page, 10)}
-              totalPages={totalPages}
-              basePath="/shop"
-              searchParams={sp as Record<string, string>}
-            />
+            {/* Pagination */}
+            <Pagination currentPage={parseInt(page, 10)} totalPages={totalPages} basePath="/shop" searchParams={sp as Record<string, string>} />
           </div>
         </div>
-      </div>
+      </section>
     </>
   );
 }
