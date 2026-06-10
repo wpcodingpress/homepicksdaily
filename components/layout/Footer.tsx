@@ -3,7 +3,14 @@ import Image from 'next/image';
 import Link from 'next/link';
 import { Mail, Phone, Clock, Heart, Truck, Shield, Leaf } from 'lucide-react';
 
-const shopLinks = ['All Products', 'Kitchen', 'Bathroom', 'Laundry', 'Cleaning Tools', 'Eco-Friendly'];
+const shopLinks: Array<{ label: string; href: string }> = [
+  { label: 'All Products', href: '/shop' },
+  { label: 'Kitchen', href: '/category/kitchen-starter-kits' },
+  { label: 'Storage', href: '/category/home-storage-organization' },
+  { label: 'Garden', href: '/category/home-garden' },
+  { label: 'Refill', href: '/category/refill-solutions' },
+  { label: 'Eco-Friendly', href: '/shop?category=eco-friendly' },
+];
 const infoLinks = ['About Us', 'Contact', 'FAQs', 'Shipping Policy', 'Returns', 'Privacy Policy'];
 
 function FacebookIcon() {
@@ -102,9 +109,9 @@ export default function Footer() {
           <div>
             <h4 style={{ fontFamily:'var(--font-heading)', fontWeight:700, fontSize:'0.9375rem', color:'white', marginBottom:'1rem' }}>Shop</h4>
             <ul style={{ listStyle:'none', display:'flex', flexDirection:'column', gap:'0.625rem' }}>
-              {shopLinks.map((label) => (
+              {shopLinks.map(({ label, href }) => (
                 <li key={label}>
-                  <Link href={`/shop?category=${label.toLowerCase().replace(/ /g,'-')}`} style={{
+                  <Link href={href} style={{
                     fontSize:'0.875rem', color:'rgba(255,255,255,0.55)', transition:'all 0.2s ease',
                   }}>{label}</Link>
                 </li>
