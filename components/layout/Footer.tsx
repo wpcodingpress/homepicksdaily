@@ -70,11 +70,11 @@ export default function Footer() {
               <Image
                 src="/logo.png"
                 alt="HomePicksDaily"
-                width={180}
-                height={54}
+                width={220}
+                height={66}
                 style={{
                   objectFit:'contain',
-                  height:'52px',
+                  height:'60px',
                   width:'auto',
                   filter:'brightness(0) invert(1)',
                 }}

@@ -10,7 +10,7 @@ import NewsletterSignup from '@/components/home/NewsletterSignup';
 import { getProducts, getCategories } from '@/lib/woocommerce';
 
 export default async function HomePage() {
-  const { products } = await getProducts({ per_page: '8' });
+  const { products } = await getProducts({ per_page: '20' });
   const categories = await getCategories();
 
   return (

@@ -1,9 +1,16 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { X, ShoppingCart } from 'lucide-react';
+import { X, ShoppingCart, ChevronDown } from 'lucide-react';
 import { useCartStore } from '@/lib/cart';
+
+interface WCCategory {
+  id: number;
+  name: string;
+  slug: string;
+  count: number;
+}
 
 const links = [
   { href: '/', label: 'Home' },
@@ -29,13 +36,18 @@ function TwitterIcon() {
   );
 }
 
-export default function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClose: () => void }) {
+export default function MobileNav({ isOpen, onClose, categories }: { isOpen: boolean; onClose: () => void; categories?: WCCategory[] }) {
+  const [showCategories, setShowCategories] = useState(false);
   const itemCount = useCartStore(s => s.itemCount());
   const openCart = useCartStore(s => s.openCart);
 
   useEffect(() => {
     document.body.style.overflow = isOpen ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
+  }, [isOpen]);
+
+  useEffect(() => {
+    if (!isOpen) setShowCategories(false);
   }, [isOpen]);
 
   return (
@@ -64,9 +76,9 @@ export default function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClos
             <Image
               src="/logo.png"
               alt="HomePicksDaily"
-              width={180}
-              height={54}
-              style={{ objectFit:'contain', height:'48px', width:'auto' }}
+              width={200}
+              height={60}
+              style={{ objectFit:'contain', height:'54px', width:'auto' }}
             />
           </Link>
           <button onClick={onClose} style={{ color:'rgba(255,255,255,0.7)', padding:'0.25rem' }}>
@@ -74,7 +86,7 @@ export default function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClos
           </button>
         </div>
 
-        <nav style={{ flex:1, padding:'1.25rem 1rem', display:'flex', flexDirection:'column', gap:'0.25rem' }}>
+        <nav style={{ flex:1, padding:'1.25rem 1rem', display:'flex', flexDirection:'column', gap:'0.25rem', overflowY:'auto' }}>
           {links.map(({ href, label }, i) => (
             <Link key={href} href={href} onClick={onClose} style={{
               padding:'0.875rem 1rem', borderRadius:'0.75rem',
@@ -88,6 +100,65 @@ export default function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClos
               {label}
             </Link>
           ))}
+
+          {/* Categories accordion */}
+          {categories && categories.length > 0 && (
+            <div>
+              <button
+                onClick={() => setShowCategories(!showCategories)}
+                style={{
+                  width:'100%', padding:'0.875rem 1rem', borderRadius:'0.75rem',
+                  color:'rgba(255,255,255,0.8)',
+                  fontFamily:'var(--font-heading)', fontSize:'1.0625rem', fontWeight:600,
+                  display:'flex', alignItems:'center', justifyContent:'space-between',
+                  cursor:'pointer', border:'none', background:'none',
+                  opacity: isOpen ? 1 : 0,
+                  transform: isOpen ? 'translateY(0)' : 'translateY(12px)',
+                  transition: `opacity 0.4s ease ${links.length*0.06}s, transform 0.4s ease ${links.length*0.06}s`,
+                }}
+              >
+                <span>Categories</span>
+                <ChevronDown size={16} style={{
+                  transform: showCategories ? 'rotate(180deg)' : 'rotate(0)',
+                  transition: 'transform 0.25s ease',
+                }} />
+              </button>
+              {showCategories && (
+                <div style={{ paddingLeft:'0.5rem', marginBottom:'0.5rem' }}>
+                  {categories.map((cat, j) => (
+                    <Link
+                      key={cat.id}
+                      href={`/category/${cat.slug}`}
+                      onClick={onClose}
+                      style={{
+                        display:'flex', alignItems:'center', justifyContent:'space-between',
+                        padding:'0.625rem 1rem', borderRadius:'0.5rem',
+                        color:'rgba(255,255,255,0.6)',
+                        fontFamily:'var(--font-body)', fontSize:'0.875rem', fontWeight:500,
+                        textDecoration:'none',
+                        opacity: isOpen ? 1 : 0,
+                        transform: isOpen ? 'translateY(0)' : 'translateY(8px)',
+                        transition: `opacity 0.3s ease ${j*0.03}s, transform 0.3s ease ${j*0.03}s, background 0.15s ease`,
+                      }}
+                      onMouseEnter={e => { (e.currentTarget as HTMLElement).style.background = 'rgba(255,255,255,0.06)'; }}
+                      onMouseLeave={e => { (e.currentTarget as HTMLElement).style.background = 'transparent'; }}
+                    >
+                      <span>{cat.name}</span>
+                      <span style={{
+                        fontSize:'0.6875rem',
+                        color:'rgba(255,255,255,0.3)',
+                        background:'rgba(255,255,255,0.06)',
+                        padding:'0.125rem 0.5rem',
+                        borderRadius:'1rem',
+                      }}>
+                        {cat.count}
+                      </span>
+                    </Link>
+                  ))}
+                </div>
+              )}
+            </div>
+          )}
         </nav>
 
         <div style={{ padding:'1rem 1.5rem', borderTop:'1px solid rgba(255,255,255,0.08)' }}>

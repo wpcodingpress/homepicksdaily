@@ -1,8 +1,8 @@
 'use client';
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect, useCallback } from 'react';
 import Link from 'next/link';
 import Image from 'next/image';
-import { ArrowRight, ShoppingCart, Star, Heart, Eye } from 'lucide-react';
+import { ArrowRight, ShoppingCart, Star, Heart, Eye, Loader2 } from 'lucide-react';
 import { useCartStore } from '@/lib/cart';
 import { formatPrice, extractMinPrice, truncateTitle } from '@/lib/utils';
 import { decodeHtml } from '@/lib/utils';
@@ -11,6 +11,13 @@ import type { WCProduct } from '@/lib/types';
 const PLACEHOLDER = 'https://images.unsplash.com/photo-1523275335684-37898b6baf30?w=400&q=80&auto=format&fit=crop';
 
 const tabs = ['All', 'Kitchen', 'Storage', 'Garden', 'Refill'];
+
+const categorySlugs: Record<string, string> = {
+  Kitchen: 'kitchen-starter-kits',
+  Storage: 'home-storage-organization',
+  Garden: 'home-garden',
+  Refill: 'refill-solutions',
+};
 
 function matchesTab(product: WCProduct, tab: string): boolean {
   if (tab === 'All') return true;
@@ -71,7 +78,6 @@ function ProductCard({ product }: { product: WCProduct }) {
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Image container */}
       <div style={{
         position: 'relative',
         aspectRatio: '1 / 1',
@@ -107,7 +113,6 @@ function ProductCard({ product }: { product: WCProduct }) {
           )}
         </Link>
 
-        {/* Badges */}
         <div style={{
           position: 'absolute', top: '0.75rem', left: '0.75rem',
           display: 'flex', flexDirection: 'column', gap: '0.375rem',
@@ -146,7 +151,6 @@ function ProductCard({ product }: { product: WCProduct }) {
           )}
         </div>
 
-        {/* Wishlist */}
         <button
           onClick={e => { e.preventDefault(); setWished(w => !w); }}
           style={{
@@ -174,7 +178,6 @@ function ProductCard({ product }: { product: WCProduct }) {
           />
         </button>
 
-        {/* Quick view */}
         <Link
           href={`/shop/${product.slug}`}
           style={{
@@ -194,7 +197,6 @@ function ProductCard({ product }: { product: WCProduct }) {
           <Eye size={15} style={{ color: '#64748B' }} />
         </Link>
 
-        {/* Add to cart slide-up bar */}
         <button
           onClick={handleAddToCart}
           disabled={product.stock_status === 'outofstock' || product.type === 'variable'}
@@ -223,7 +225,6 @@ function ProductCard({ product }: { product: WCProduct }) {
         </button>
       </div>
 
-      {/* Card body */}
       <div style={{
         padding: '1rem 1.125rem 1.25rem',
         display: 'flex',
@@ -231,7 +232,6 @@ function ProductCard({ product }: { product: WCProduct }) {
         gap: '0.5rem',
         flex: 1,
       }}>
-        {/* Stars */}
         <div style={{ display:'flex', alignItems:'center', gap:'0.25rem' }}>
           {[1,2,3,4,5].map(s => (
             <Star
@@ -255,7 +255,6 @@ function ProductCard({ product }: { product: WCProduct }) {
           )}
         </div>
 
-        {/* Product name */}
         <Link href={`/shop/${product.slug}`} style={{ textDecoration:'none' }}>
           <h3 style={{
             fontFamily: 'var(--font-heading)',
@@ -277,7 +276,6 @@ function ProductCard({ product }: { product: WCProduct }) {
           </h3>
         </Link>
 
-        {/* Category tag */}
         {product.categories[0] && (
           <span style={{
             fontSize: '0.6875rem',
@@ -291,7 +289,6 @@ function ProductCard({ product }: { product: WCProduct }) {
           </span>
         )}
 
-        {/* Price + CTA */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
@@ -351,19 +348,47 @@ function ProductCard({ product }: { product: WCProduct }) {
   );
 }
 
-export default function BestsellerGrid({ products }: { products: WCProduct[] }) {
+export default function BestsellerGrid({ products: initialProducts }: { products: WCProduct[] }) {
   const [activeTab, setActiveTab] = useState('All');
+  const [allProducts, setAllProducts] = useState<WCProduct[]>(initialProducts);
+  const [loading, setLoading] = useState(false);
 
   const filtered = useMemo(
-    () => products.filter(p => matchesTab(p, activeTab)).slice(0, 8),
-    [products, activeTab]
+    () => allProducts.filter(p => matchesTab(p, activeTab)).slice(0, 8),
+    [allProducts, activeTab]
   );
+
+  const fetchByTab = useCallback(async (tab: string) => {
+    if (tab === 'All') {
+      setAllProducts(initialProducts);
+      return;
+    }
+    setLoading(true);
+    try {
+      const slug = categorySlugs[tab];
+      const params = slug ? `?category_slug=${slug}&per_page=20` : '?per_page=20';
+      const res = await fetch(`/api/products${params}`);
+      const data = await res.json();
+      setAllProducts(data.products ?? []);
+    } catch {
+      setAllProducts(initialProducts);
+    } finally {
+      setLoading(false);
+    }
+  }, [initialProducts]);
+
+  const handleTabClick = (tab: string) => {
+    setActiveTab(tab);
+    const localMatch = initialProducts.filter(p => matchesTab(p, tab));
+    if (localMatch.length === 0) {
+      fetchByTab(tab);
+    }
+  };
 
   return (
     <section className="section" style={{ background: 'white' }}>
       <div className="container">
 
-        {/* Header */}
         <div style={{
           display: 'flex',
           alignItems: 'flex-end',
@@ -389,7 +414,6 @@ export default function BestsellerGrid({ products }: { products: WCProduct[] }) 
           </Link>
         </div>
 
-        {/* Filter Tabs */}
         <div style={{
           display: 'flex',
           gap: '0.5rem',
@@ -404,7 +428,7 @@ export default function BestsellerGrid({ products }: { products: WCProduct[] }) 
           {tabs.map(tab => (
             <button
               key={tab}
-              onClick={() => setActiveTab(tab)}
+              onClick={() => handleTabClick(tab)}
               style={{
                 padding: '0.5rem 1.25rem',
                 borderRadius: '0.625rem',
@@ -418,17 +442,20 @@ export default function BestsellerGrid({ products }: { products: WCProduct[] }) 
                 boxShadow: activeTab === tab ? '0 4px 16px rgba(245,129,31,0.3)' : 'none',
                 transition: 'all 0.25s ease',
                 whiteSpace: 'nowrap',
+                display: 'flex', alignItems: 'center', gap: '0.375rem',
               }}
             >
               {tab}
+              {loading && activeTab === tab && (
+                <Loader2 size={14} style={{ animation: 'spin 1s linear infinite' }} />
+              )}
             </button>
           ))}
         </div>
 
-        {/* Product Grid */}
-        {filtered.length === 0 ? (
+        {filtered.length === 0 && !loading ? (
           <div style={{ textAlign:'center', padding:'4rem', color:'var(--color-text-muted)' }}>
-            <p>No products found in this category.</p>
+            <p>No products found in this category. Try another tab.</p>
           </div>
         ) : (
           <div style={{
@@ -442,7 +469,6 @@ export default function BestsellerGrid({ products }: { products: WCProduct[] }) 
           </div>
         )}
 
-        {/* Bottom CTA */}
         <div style={{ textAlign:'center', marginTop:'3rem' }}>
           <Link href="/shop" style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.625rem',
@@ -464,6 +490,13 @@ export default function BestsellerGrid({ products }: { products: WCProduct[] }) 
           </Link>
         </div>
       </div>
+
+      <style>{`
+        @keyframes spin {
+          from { transform: rotate(0deg); }
+          to { transform: rotate(360deg); }
+        }
+      `}</style>
     </section>
   );
 }
