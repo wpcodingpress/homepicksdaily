@@ -64,9 +64,9 @@ export default function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClos
             <Image
               src="/logo.png"
               alt="HomePicksDaily"
-              width={140}
-              height={42}
-              style={{ objectFit:'contain', height:'36px', width:'auto' }}
+              width={180}
+              height={54}
+              style={{ objectFit:'contain', height:'48px', width:'auto' }}
             />
           </Link>
           <button onClick={onClose} style={{ color:'rgba(255,255,255,0.7)', padding:'0.25rem' }}>

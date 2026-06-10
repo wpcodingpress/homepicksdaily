@@ -70,9 +70,14 @@ export default function Footer() {
               <Image
                 src="/logo.png"
                 alt="HomePicksDaily"
-                width={160}
-                height={48}
-                style={{ objectFit:'contain', height:'44px', width:'auto', filter:'brightness(0) invert(1)' }}
+                width={180}
+                height={54}
+                style={{
+                  objectFit:'contain',
+                  height:'52px',
+                  width:'auto',
+                  filter:'brightness(0) invert(1)',
+                }}
               />
             </Link>
             <p style={{ fontSize:'0.875rem', lineHeight:1.7, color:'rgba(255,255,255,0.55)', marginBottom:'1.25rem' }}>

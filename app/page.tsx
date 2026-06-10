@@ -1,4 +1,4 @@
-import HeroBanner from '@/components/home/HeroBanner';
+import HeroSlider from '@/components/home/HeroSlider';
 import MarqueeBanner from '@/components/home/MarqueeBanner';
 import ValuePropositions from '@/components/home/ValuePropositions';
 import FeaturedCategories from '@/components/home/FeaturedCategories';
@@ -7,18 +7,19 @@ import HowItWorks from '@/components/home/HowItWorks';
 import Testimonials from '@/components/home/Testimonials';
 import StatsSection from '@/components/home/StatsSection';
 import NewsletterSignup from '@/components/home/NewsletterSignup';
-import { getProducts } from '@/lib/woocommerce';
+import { getProducts, getCategories } from '@/lib/woocommerce';
 
 export default async function HomePage() {
-  const { products } = await getProducts({ per_page: '6' });
+  const { products } = await getProducts({ per_page: '8' });
+  const categories = await getCategories();
 
   return (
     <>
-      <HeroBanner />
+      <HeroSlider />
       <MarqueeBanner />
       <ValuePropositions />
-      <FeaturedCategories />
-      <BestsellerGrid initialProducts={products} />
+      <FeaturedCategories categories={categories} />
+      <BestsellerGrid products={products} />
       <HowItWorks />
       <Testimonials />
       <StatsSection />

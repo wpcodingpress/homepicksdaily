@@ -20,7 +20,7 @@ export default function PageHeader({
   return (
     <section style={{
       position: 'relative',
-      minHeight: 'clamp(220px, 35vw, 340px)',
+      minHeight: 'clamp(260px, 40vw, 400px)',
       display: 'flex',
       alignItems: 'flex-end',
       overflow: 'hidden',
@@ -54,8 +54,9 @@ export default function PageHeader({
       {/* Overlay */}
       {overlay && (
         <div style={{
-          position: 'absolute', inset: 0,
-          background: 'linear-gradient(to top, rgba(27,63,114,0.85) 0%, rgba(27,63,114,0.4) 50%, rgba(0,0,0,0.1) 100%)',
+          position: 'absolute',
+          inset: 0,
+          background: 'linear-gradient(to top, rgba(27,63,114,0.82) 0%, rgba(27,63,114,0.35) 40%, rgba(0,0,0,0.08) 100%)',
         }} />
       )}
 

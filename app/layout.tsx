@@ -23,7 +23,10 @@ export const metadata: Metadata = {
   description: 'Discover 500+ eco-friendly home and cleaning products. Sustainable, effective, and affordable.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://homepicksdaily.com'),
   icons: {
-    icon: '/favicon.ico',
+    icon: [
+      { url: '/favicon.ico', sizes: 'any' },
+      { url: '/favicon.ico', type: 'image/x-icon' },
+    ],
     shortcut: '/favicon.ico',
     apple: '/favicon.ico',
   },

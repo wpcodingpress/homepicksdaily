@@ -53,14 +53,19 @@ export default function Header() {
         <div className="container">
           <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', height:'72px', gap:'2rem' }}>
 
-            {/* Logo — use real logo.png */}
-            <Link href="/" style={{ display:'flex', alignItems:'center', flexShrink:0 }}>
+            {/* Logo */}
+            <Link href="/" style={{ display:'flex', alignItems:'center', flexShrink:0, textDecoration:'none' }}>
               <Image
                 src="/logo.png"
                 alt="HomePicksDaily"
-                width={160}
-                height={48}
-                style={{ objectFit:'contain', height:'42px', width:'auto' }}
+                width={200}
+                height={60}
+                style={{
+                  objectFit: 'contain',
+                  height: 'clamp(44px, 5vw, 56px)',
+                  width: 'auto',
+                  maxWidth: '200px',
+                }}
                 priority
               />
             </Link>
