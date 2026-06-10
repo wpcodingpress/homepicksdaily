@@ -15,13 +15,13 @@ export default function CartIcon({ scrolled = false }: CartIconProps) {
     <button
       onClick={openCart}
       className={`relative flex h-10 w-10 items-center justify-center rounded-full transition-colors ${
-        scrolled ? "text-white hover:bg-white/10" : "text-[#1C1C2E] hover:bg-gray-100"
+        scrolled ? "text-white hover:bg-white/10" : "text-[#0F1923] hover:bg-gray-100"
       }`}
       aria-label="Open cart"
     >
       <ShoppingCart className="w-5 h-5" />
       {count > 0 && (
-        <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#FF5722] px-1 text-[10px] font-bold text-white">
+        <span className="absolute -right-0.5 -top-0.5 flex h-[18px] min-w-[18px] items-center justify-center rounded-full bg-[#F5811F] px-1 text-[10px] font-bold text-white">
           {count > 99 ? "99+" : count}
         </span>
       )}

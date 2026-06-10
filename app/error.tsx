@@ -11,7 +11,7 @@ export default function Error({
 }) {
   return (
     <div className="flex flex-1 flex-col items-center justify-center gap-6 py-32 px-4 text-center">
-      <h1 className="font-heading text-4xl font-bold text-[#1C1C2E]">
+      <h1 className="font-heading text-4xl font-bold text-[#0F1923]">
         Something went wrong
       </h1>
       <p className="max-w-md text-[#6B7280]">
@@ -20,13 +20,13 @@ export default function Error({
       <div className="flex gap-3">
         <button
           onClick={reset}
-          className="rounded-xl bg-[#FF5722] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#FF7043]"
+          className="rounded-xl bg-[#F5811F] px-6 py-3 font-semibold text-white transition-colors hover:bg-[#FF7043]"
         >
           Try again
         </button>
         <Link
           href="/"
-          className="rounded-xl border-2 border-gray-200 px-6 py-3 font-semibold text-[#1C1C2E] transition-colors hover:bg-gray-50"
+          className="rounded-xl border-2 border-gray-200 px-6 py-3 font-semibold text-[#0F1923] transition-colors hover:bg-gray-50"
         >
           Go home
         </Link>

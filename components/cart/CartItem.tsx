@@ -33,7 +33,7 @@ export default function CartItem({ item }: CartItemProps) {
         <div className="flex justify-between gap-2">
           <Link
             href={`/shop/${item.slug}`}
-            className="text-sm font-semibold text-[#1C1C2E] line-clamp-1 hover:text-[#FF5722]"
+            className="text-sm font-semibold text-[#0F1923] line-clamp-1 hover:text-[#F5811F]"
           >
             {item.name}
           </Link>
@@ -70,7 +70,7 @@ export default function CartItem({ item }: CartItemProps) {
               <Plus className="w-3 h-3" />
             </button>
           </div>
-          <span className="text-sm font-bold text-[#1C1C2E]">
+          <span className="text-sm font-bold text-[#0F1923]">
             {formatPrice(item.price * item.quantity)}
           </span>
         </div>

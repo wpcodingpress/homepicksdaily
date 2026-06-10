@@ -13,7 +13,7 @@ const items = [
 export default function MarqueeBanner() {
   return (
     <div style={{
-      background:'#FF5722',
+      background:'#F5811F',
       overflow:'hidden',
       padding:'0.75rem 0',
     }}>

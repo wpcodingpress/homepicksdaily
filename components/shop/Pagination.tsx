@@ -60,7 +60,7 @@ export default function Pagination({
             href={buildHref(p)}
             className={`flex h-10 w-10 items-center justify-center rounded-lg text-sm font-semibold transition-colors ${
               p === currentPage
-                ? "bg-[#FF5722] text-white"
+                ? "bg-[#F5811F] text-white"
                 : "border border-gray-200 text-gray-500 hover:bg-gray-100"
             }`}
           >

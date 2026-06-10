@@ -13,7 +13,7 @@ export default function CartPageClient() {
       <section style={{ background: '#F8FAFC', padding: '6rem 0' }}>
         <div className="container" style={{ textAlign: 'center' }}>
           <ShoppingCart size={80} style={{ color: '#CBD5E1', margin: '0 auto 1.5rem' }} />
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 700, color: '#0F0F1A', marginBottom: '0.5rem' }}>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 700, color: '#0F1923', marginBottom: '0.5rem' }}>
             Your cart is empty
           </h1>
           <p style={{ color: '#64748B', marginBottom: '1.5rem' }}>Looks like you haven&apos;t added anything yet.</p>
@@ -30,10 +30,10 @@ export default function CartPageClient() {
         <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', color: '#64748B', marginBottom: '1.5rem' }}>
           <Link href="/" style={{ color: 'inherit' }}>Home</Link>
           <span>/</span>
-          <span style={{ color: '#0F0F1A', fontWeight: 600 }}>Cart</span>
+          <span style={{ color: '#0F1923', fontWeight: 600 }}>Cart</span>
         </div>
 
-        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#0F0F1A', marginBottom: '2rem' }}>
+        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#0F1923', marginBottom: '2rem' }}>
           Shopping Cart
         </h1>
 
@@ -48,7 +48,7 @@ export default function CartPageClient() {
               ))}
             </div>
             <div style={{ marginTop: '1.5rem' }}>
-              <Link href="/shop" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontWeight: 600, color: '#FF5722' }}>
+              <Link href="/shop" style={{ display: 'inline-flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', fontWeight: 600, color: '#F5811F' }}>
                 <ArrowLeft size={16} /> Continue Shopping
               </Link>
             </div>

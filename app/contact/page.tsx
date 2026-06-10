@@ -1,93 +1,77 @@
-'use client';
-import { useState } from 'react';
-import { Mail, Phone, MapPin, Clock, Send } from 'lucide-react';
+import PageHeader from '@/components/ui/PageHeader';
+import ContactForm from '@/components/contact/ContactForm';
+import { Mail, Phone, Clock, MapPin } from 'lucide-react';
 
-const contactInfo = [
-  { icon: Mail, label: 'Email', value: 'support@homepicksdaily.com' },
-  { icon: Phone, label: 'Phone', value: '+1 (555) 123-4567' },
-  { icon: MapPin, label: 'Location', value: 'Austin, TX, USA' },
-  { icon: Clock, label: 'Hours', value: 'Mon–Fri, 9am–6pm EST' },
-];
+export const metadata = {
+  title: 'Contact Us | HomePicksDaily',
+  description: 'Get in touch with our team. We are here to help.',
+};
 
 export default function ContactPage() {
-  const [form, setForm] = useState({ name: '', email: '', message: '' });
-  const [sent, setSent] = useState(false);
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-    if (form.name && form.email && form.message) { setSent(true); setForm({ name: '', email: '', message: '' }); }
-  };
-
-  const inputStyle: React.CSSProperties = {
-    width: '100%', padding: '0.875rem 1rem', borderRadius: '0.75rem',
-    border: '1px solid #E2E8F0', fontSize: '0.9375rem',
-    fontFamily: 'var(--font-body)', outline: 'none',
-    transition: 'all 0.2s ease',
-  };
-
   return (
     <>
-      {/* Hero */}
-      <section style={{ background: '#0F0F1A', padding: '5rem 0' }}>
-        <div className="container">
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, color: 'white', marginBottom: '1rem' }}>
-            Contact Us
-          </h1>
-          <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.6)', maxWidth: '560px' }}>
-            Have a question? We would love to hear from you. Send us a message and we will respond within 24 hours.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        title="Contact Us"
+        subtitle="We're here to help. Reach out anytime."
+        backgroundImage="/contact-page-header.jpg"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Contact' },
+        ]}
+      />
 
-      {/* Form + Info */}
-      <section style={{ padding: '5rem 0' }}>
+      <section className="section">
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem' }}>
-            {/* Form */}
-            <form onSubmit={handleSubmit} style={{ display: 'flex', flexDirection: 'column', gap: '1.25rem' }}>
-              <div>
-                <label style={{ display: 'block', fontWeight: 600, fontSize: '0.875rem', color: '#0F0F1A', marginBottom: '0.375rem' }}>Name *</label>
-                <input type="text" required value={form.name} onChange={e => setForm({ ...form, name: e.target.value })}
-                  placeholder="Your name" style={inputStyle} />
-              </div>
-              <div>
-                <label style={{ display: 'block', fontWeight: 600, fontSize: '0.875rem', color: '#0F0F1A', marginBottom: '0.375rem' }}>Email *</label>
-                <input type="email" required value={form.email} onChange={e => setForm({ ...form, email: e.target.value })}
-                  placeholder="your@email.com" style={inputStyle} />
-              </div>
-              <div>
-                <label style={{ display: 'block', fontWeight: 600, fontSize: '0.875rem', color: '#0F0F1A', marginBottom: '0.375rem' }}>Message *</label>
-                <textarea required rows={5} value={form.message} onChange={e => setForm({ ...form, message: e.target.value })}
-                  placeholder="How can we help?" style={{ ...inputStyle, resize: 'none' }} />
-              </div>
-              <button type="submit" className="btn btn-primary" style={{ alignSelf: 'flex-start' }}>
-                <Send size={16} />
-                {sent ? 'Message Sent!' : 'Send Message'}
-              </button>
-              {sent && <p style={{ color: '#10B981', fontWeight: 600, fontSize: '0.875rem' }}>Thanks for reaching out! We will get back to you soon.</p>}
-            </form>
-
-            {/* Info cards */}
-            <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
-              {contactInfo.map(info => (
-                <div key={info.label} style={{
-                  background: '#0F0F1A', borderRadius: '1rem', padding: '1.5rem',
-                  display: 'flex', alignItems: 'flex-start', gap: '1rem',
-                }}>
-                  <div style={{
-                    width: '48px', height: '48px', borderRadius: '50%',
-                    background: 'rgba(0,188,212,0.2)', color: '#00BCD4',
-                    display: 'flex', alignItems: 'center', justifyContent: 'center',
-                    flexShrink: 0,
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(300px, 1fr))', gap:'4rem' }}>
+            {/* Info */}
+            <div>
+              <h2 style={{ fontFamily:'var(--font-heading)', fontSize:'1.75rem', fontWeight:800, marginBottom:'2rem' }}>
+                Get in Touch
+              </h2>
+              <div style={{ display:'flex', flexDirection:'column', gap:'1.5rem' }}>
+                {[
+                  { icon: Mail, label:'Email Us', value:'hi@homepicksdaily.com', color:'#F5811F' },
+                  { icon: Phone, label:'Call Us', value:'+1 (555) 123-4567', color:'#1B3F72' },
+                  { icon: Clock, label:'Business Hours', value:'Mon–Fri, 9am–6pm EST', color:'#22C55E' },
+                  { icon: MapPin, label:'Our Location', value:'Global — We ship worldwide', color:'#EF4444' },
+                ].map(({ icon: Icon, label, value, color }) => (
+                  <div key={label} style={{
+                    display:'flex', alignItems:'flex-start', gap:'1rem',
+                    padding:'1.25rem', background:'white', borderRadius:'1rem',
+                    border:'1px solid var(--color-light-border)',
+                    boxShadow:'0 2px 12px rgba(0,0,0,0.04)',
                   }}>
-                    <info.icon size={24} />
+                    <div style={{
+                      width:'44px', height:'44px', borderRadius:'0.75rem',
+                      background:`${color}15`,
+                      display:'flex', alignItems:'center', justifyContent:'center',
+                      flexShrink:0,
+                    }}>
+                      <Icon size={20} style={{ color }} />
+                    </div>
+                    <div>
+                      <div style={{ fontFamily:'var(--font-heading)', fontWeight:700, fontSize:'0.875rem', color:'var(--color-text-muted)', marginBottom:'0.25rem' }}>
+                        {label}
+                      </div>
+                      <div style={{ fontFamily:'var(--font-body)', fontWeight:500, color:'var(--color-text)' }}>
+                        {value}
+                      </div>
+                    </div>
                   </div>
-                  <div>
-                    <p style={{ fontSize: '0.8125rem', color: 'rgba(255,255,255,0.5)', marginBottom: '0.25rem' }}>{info.label}</p>
-                    <p style={{ fontWeight: 600, color: 'white', fontSize: '0.9375rem' }}>{info.value}</p>
-                  </div>
-                </div>
-              ))}
+                ))}
+              </div>
+            </div>
+
+            {/* Form */}
+            <div style={{
+              background:'white', borderRadius:'1.5rem', padding:'2.5rem',
+              border:'1px solid var(--color-light-border)',
+              boxShadow:'0 8px 40px rgba(0,0,0,0.06)',
+            }}>
+              <h3 style={{ fontFamily:'var(--font-heading)', fontSize:'1.5rem', fontWeight:800, marginBottom:'2rem' }}>
+                Send us a Message
+              </h3>
+              <ContactForm />
             </div>
           </div>
         </div>

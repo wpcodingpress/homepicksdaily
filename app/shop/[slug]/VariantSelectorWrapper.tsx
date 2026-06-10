@@ -90,7 +90,7 @@ export default function VariantSelectorWrapper({
       {matchedVariation && (
         <div className="rounded-xl bg-gray-50 p-4">
           <p className="text-sm text-[#6B7280]">Selected price:</p>
-          <p className="font-heading text-2xl font-bold text-[#FF5722]">
+          <p className="font-heading text-2xl font-bold text-[#F5811F]">
             {matchedVariation.on_sale && matchedVariation.sale_price
               ? formatPrice(matchedVariation.sale_price)
               : formatPrice(matchedVariation.price)}
@@ -99,7 +99,7 @@ export default function VariantSelectorWrapper({
       )}
 
       <div className="flex items-center gap-3">
-        <span className="text-sm font-semibold text-[#1C1C2E]">Quantity:</span>
+        <span className="text-sm font-semibold text-[#0F1923]">Quantity:</span>
         <div className="flex items-center gap-2">
           <button
             onClick={() => setQuantity(Math.max(1, quantity - 1))}
@@ -108,7 +108,7 @@ export default function VariantSelectorWrapper({
           >
             <Minus className="w-4 h-4" />
           </button>
-          <span className="w-10 text-center text-lg font-semibold text-[#1C1C2E]">{quantity}</span>
+          <span className="w-10 text-center text-lg font-semibold text-[#0F1923]">{quantity}</span>
           <button
             onClick={() => setQuantity(quantity + 1)}
             className="flex h-10 w-10 items-center justify-center rounded-lg border border-gray-200 text-[#6B7280] transition-colors hover:bg-gray-100"
@@ -122,7 +122,7 @@ export default function VariantSelectorWrapper({
       <button
         onClick={handleAdd}
         disabled={!matchedVariation || product.stock_status !== "instock"}
-        className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#FF5722] py-3.5 font-bold text-white transition-all hover:bg-[#FF7043] disabled:cursor-not-allowed disabled:bg-gray-400"
+        className="flex w-full items-center justify-center gap-2 rounded-xl bg-[#F5811F] py-3.5 font-bold text-white transition-all hover:bg-[#FF7043] disabled:cursor-not-allowed disabled:bg-gray-400"
       >
         <ShoppingCart className="w-5 h-5" />
         {!matchedVariation ? "Select Options" : added ? "Added!" : "Add to Cart"}
@@ -131,7 +131,7 @@ export default function VariantSelectorWrapper({
       <button
         onClick={handleBuyNow}
         disabled={!matchedVariation || product.stock_status !== "instock"}
-        className="flex w-full items-center justify-center rounded-xl border-2 border-[#1C1C2E] py-3.5 font-bold text-[#1C1C2E] transition-all hover:bg-[#1C1C2E] hover:text-white disabled:cursor-not-allowed disabled:border-gray-300 disabled:text-gray-400"
+        className="flex w-full items-center justify-center rounded-xl border-2 border-[#0F1923] py-3.5 font-bold text-[#0F1923] transition-all hover:bg-[#0F1923] hover:text-white disabled:cursor-not-allowed disabled:border-gray-300 disabled:text-gray-400"
       >
         Buy Now
       </button>

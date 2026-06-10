@@ -1,7 +1,8 @@
 'use client';
 import { useEffect } from 'react';
 import Link from 'next/link';
-import { X, ShoppingCart, Leaf } from 'lucide-react';
+import Image from 'next/image';
+import { X, ShoppingCart } from 'lucide-react';
 import { useCartStore } from '@/lib/cart';
 
 const links = [
@@ -48,7 +49,7 @@ export default function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClos
       <div style={{
         position:'absolute', top:0, right:0,
         width:'85%', maxWidth:'340px', height:'100%',
-        background:'#0F0F1A',
+        background:'#0F1923',
         transform: isOpen ? 'translateX(0)' : 'translateX(100%)',
         transition:'transform 0.35s cubic-bezier(0.16,1,0.3,1)',
         display:'flex', flexDirection:'column',
@@ -59,9 +60,15 @@ export default function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClos
           padding:'1.25rem 1.5rem',
           borderBottom:'1px solid rgba(255,255,255,0.08)',
         }}>
-          <span style={{ fontFamily:'var(--font-heading)', fontWeight:800, fontSize:'18px', color:'rgba(255,255,255,0.9)', display:'flex', alignItems:'center', gap:'0.5rem' }}>
-            <Leaf size={18} color="#00BCD4" /> Menu
-          </span>
+          <Link href="/" onClick={onClose}>
+            <Image
+              src="/logo.png"
+              alt="HomePicksDaily"
+              width={140}
+              height={42}
+              style={{ objectFit:'contain', height:'36px', width:'auto' }}
+            />
+          </Link>
           <button onClick={onClose} style={{ color:'rgba(255,255,255,0.7)', padding:'0.25rem' }}>
             <X size={22} />
           </button>
@@ -86,10 +93,10 @@ export default function MobileNav({ isOpen, onClose }: { isOpen: boolean; onClos
         <div style={{ padding:'1rem 1.5rem', borderTop:'1px solid rgba(255,255,255,0.08)' }}>
           <button onClick={() => { openCart(); onClose(); }} style={{
             width:'100%', padding:'0.875rem', borderRadius:'0.625rem',
-            background:'#FF5722', color:'white',
+            background:'#F5811F', color:'white',
             fontFamily:'var(--font-heading)', fontWeight:700, fontSize:'0.9375rem',
             display:'flex', alignItems:'center', justifyContent:'center', gap:'0.625rem',
-            boxShadow:'0 4px 20px rgba(255,87,34,0.35)',
+            boxShadow:'0 4px 20px rgba(245,129,31,0.35)',
           }}>
             <ShoppingCart size={18} />
             View Cart

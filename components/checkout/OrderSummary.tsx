@@ -13,7 +13,7 @@ export default function OrderSummary({ items }: OrderSummaryProps) {
 
   return (
     <div className="rounded-2xl bg-white p-6 shadow-lg">
-      <h3 className="mb-4 font-heading text-lg font-bold text-[#1C1C2E]">
+      <h3 className="mb-4 font-heading text-lg font-bold text-[#0F1923]">
         Order Summary
       </h3>
 
@@ -21,10 +21,10 @@ export default function OrderSummary({ items }: OrderSummaryProps) {
         {items.map((item) => (
           <div key={`${item.id}-${item.variationId}`} className="flex items-center justify-between text-sm">
             <div className="flex-1">
-              <p className="font-medium text-[#1C1C2E] line-clamp-1">{item.name}</p>
+              <p className="font-medium text-[#0F1923] line-clamp-1">{item.name}</p>
               <p className="text-xs text-[#6B7280]">Qty: {item.quantity}</p>
             </div>
-            <span className="font-semibold text-[#1C1C2E]">
+            <span className="font-semibold text-[#0F1923]">
               {formatPrice(item.price * item.quantity)}
             </span>
           </div>
@@ -49,7 +49,7 @@ export default function OrderSummary({ items }: OrderSummaryProps) {
       </div>
 
       <div className="mt-4 border-t border-gray-100 pt-4">
-        <div className="flex justify-between text-lg font-bold text-[#1C1C2E]">
+        <div className="flex justify-between text-lg font-bold text-[#0F1923]">
           <span>Total</span>
           <span>{formatPrice(subtotal + shipping)}</span>
         </div>

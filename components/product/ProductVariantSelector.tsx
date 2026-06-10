@@ -45,7 +45,7 @@ export default function ProductVariantSelector({
 
         return (
           <div key={attrKey}>
-            <label className="mb-2 block text-sm font-semibold text-[#1C1C2E]">
+            <label className="mb-2 block text-sm font-semibold text-[#0F1923]">
               {attrKey}: <span className="ml-1 font-normal text-[#6B7280]">{selected[attrKey] || "Select"}</span>
             </label>
 
@@ -62,7 +62,7 @@ export default function ProductVariantSelector({
                       className={cn(
                         "flex h-10 w-10 items-center justify-center rounded-full border-2 transition-all",
                         isSelected
-                          ? "border-[#FF5722] ring-2 ring-[#FF5722]/30 scale-110"
+                          ? "border-[#F5811F] ring-2 ring-[#F5811F]/30 scale-110"
                           : "border-gray-200 hover:border-gray-400",
                         !isAvailable && "opacity-30 cursor-not-allowed"
                       )}
@@ -90,8 +90,8 @@ export default function ProductVariantSelector({
                       className={cn(
                         "rounded-lg border px-4 py-2 text-sm font-medium transition-all",
                         isSelected
-                          ? "border-[#FF5722] bg-[#FF5722]/10 text-[#FF5722]"
-                          : "border-gray-200 text-[#1C1C2E] hover:border-gray-400",
+                          ? "border-[#F5811F] bg-[#F5811F]/10 text-[#F5811F]"
+                          : "border-gray-200 text-[#0F1923] hover:border-gray-400",
                         !isAvailable && "opacity-30 cursor-not-allowed"
                       )}
                     >

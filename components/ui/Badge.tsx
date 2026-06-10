@@ -8,7 +8,7 @@ interface BadgeProps {
 }
 
 const variants: Record<string, string> = {
-  sale: "bg-[#FF5722] text-white",
+  sale: "bg-[#F5811F] text-white",
   featured: "bg-[#00BCD4] text-white",
   outofstock: "bg-gray-500 text-white",
   default: "bg-gray-100 text-[#6B7280]",

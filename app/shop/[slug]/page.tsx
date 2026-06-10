@@ -56,9 +56,20 @@ export default async function ProductPage({ params }: ProductPageProps) {
     <>
       <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
 
-      <div className="container" style={{ paddingTop: '1.5rem', paddingBottom: '1.5rem' }}>
-        <ProductBreadcrumb categories={product.categories} productName={product.name} />
+      {/* Branded product header */}
+      <div style={{ background: 'linear-gradient(135deg, #0F1923 0%, #1B3F72 100%)', padding: '1.5rem 0' }}>
+        <div className="container">
+          <nav style={{ display:'flex', gap:'0.5rem', fontSize:'0.8125rem', color:'rgba(255,255,255,0.6)' }}>
+            <a href="/" style={{color:'rgba(255,255,255,0.6)'}}>Home</a>
+            <span>/</span>
+            <a href="/shop" style={{color:'rgba(255,255,255,0.6)'}}>Shop</a>
+            <span>/</span>
+            <span style={{color:'white'}} className="line-clamp-1">{product.name}</span>
+          </nav>
+        </div>
+      </div>
 
+      <div className="container" style={{ paddingTop: '1.5rem', paddingBottom: '1.5rem' }}>
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '2rem', marginTop: '1.5rem' }}>
           {/* Gallery */}
           <ProductImageGallery images={product.images} />
@@ -66,7 +77,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
           {/* Info */}
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
             <div>
-              <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 2.5vw, 1.75rem)', fontWeight: 800, color: '#0F0F1A', marginBottom: '0.5rem' }}>
+              <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 2.5vw, 1.75rem)', fontWeight: 800, color: '#0F1923', marginBottom: '0.5rem' }}>
                 {product.name}
               </h1>
               <ProductPrice price={product.price} regularPrice={product.regular_price} salePrice={product.sale_price} onSale={product.on_sale} priceHtml={product.price_html} type={product.type} />
@@ -109,7 +120,7 @@ export default async function ProductPage({ params }: ProductPageProps) {
         {/* Description tab */}
         <div style={{ marginTop: '3rem' }}>
           <div style={{ borderBottom: '1px solid #E2E8F0' }}>
-            <span style={{ display: 'inline-block', borderBottom: '2px solid #FF5722', paddingBottom: '0.75rem', fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.875rem', color: '#0F0F1A' }}>
+            <span style={{ display: 'inline-block', borderBottom: '2px solid #F5811F', paddingBottom: '0.75rem', fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '0.875rem', color: '#0F1923' }}>
               Description
             </span>
           </div>

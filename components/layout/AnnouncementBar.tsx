@@ -23,7 +23,7 @@ export default function AnnouncementBar() {
 
   return (
     <div style={{
-      background: 'linear-gradient(135deg, #FF5722, #E64A19)',
+      background: 'linear-gradient(135deg, #F5811F, #E06B0A)',
       color: 'white',
       fontSize: '0.8125rem',
       fontWeight: 500,

@@ -12,15 +12,15 @@ export default function NewsletterSignup() {
   };
 
   return (
-    <section style={{ position: 'relative', overflow: 'hidden', background: '#0F0F1A', padding: '5rem 0' }}>
+    <section style={{ position: 'relative', overflow: 'hidden', background: '#0F1923', padding: '5rem 0' }}>
       {/* Decorative blurs */}
       <div style={{ position: 'absolute', right: '-100px', top: '-100px', width: '400px', height: '400px', borderRadius: '50%', background: '#00BCD4', opacity: 0.08, filter: 'blur(60px)', pointerEvents: 'none' }} />
-      <div style={{ position: 'absolute', left: '-100px', bottom: '-100px', width: '400px', height: '400px', borderRadius: '50%', background: '#FF5722', opacity: 0.08, filter: 'blur(60px)', pointerEvents: 'none' }} />
+      <div style={{ position: 'absolute', left: '-100px', bottom: '-100px', width: '400px', height: '400px', borderRadius: '50%', background: '#F5811F', opacity: 0.08, filter: 'blur(60px)', pointerEvents: 'none' }} />
 
       <div className="container">
         <div style={{ maxWidth: '560px', margin: '0 auto', textAlign: 'center', position: 'relative', zIndex: 1 }}>
           <div style={{ display: 'flex', justifyContent: 'center', marginBottom: '1rem' }}>
-            <Mail size={48} color="#FF5722" />
+            <Mail size={48} color="#F5811F" />
           </div>
 
           <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.75rem, 4vw, 2.5rem)', fontWeight: 800, color: 'white', lineHeight: 1.15, marginBottom: '0.75rem' }}>
@@ -31,7 +31,7 @@ export default function NewsletterSignup() {
           </p>
 
           {submitted ? (
-            <p style={{ fontSize: '1.125rem', fontWeight: 700, color: '#FF5722' }}>Thanks for subscribing! Check your inbox.</p>
+            <p style={{ fontSize: '1.125rem', fontWeight: 700, color: '#F5811F' }}>Thanks for subscribing! Check your inbox.</p>
           ) : (
             <form onSubmit={handleSubmit} style={{ display: 'flex', gap: '0.75rem', maxWidth: '440px', margin: '0 auto' }}>
               <input type="email" required value={email} onChange={e => setEmail(e.target.value)}

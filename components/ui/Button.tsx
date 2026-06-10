@@ -8,10 +8,10 @@ interface ButtonProps extends ButtonHTMLAttributes<HTMLButtonElement> {
 }
 
 const variants: Record<string, string> = {
-  primary: "bg-[#FF5722] text-white hover:bg-[#FF7043] active:bg-[#E64A19]",
-  secondary: "bg-[#1C1C2E] text-white hover:bg-[#252536]",
-  outline: "border-2 border-[#FF5722] text-[#FF5722] hover:bg-[#FF5722] hover:text-white",
-  ghost: "text-[#6B7280] hover:text-[#1C1C2E] hover:bg-gray-100",
+  primary: "bg-[#F5811F] text-white hover:bg-[#FF7043] active:bg-[#E06B0A]",
+  secondary: "bg-[#0F1923] text-white hover:bg-[#252536]",
+  outline: "border-2 border-[#F5811F] text-[#F5811F] hover:bg-[#F5811F] hover:text-white",
+  ghost: "text-[#6B7280] hover:text-[#0F1923] hover:bg-gray-100",
 };
 
 const sizes: Record<string, string> = {
@@ -24,7 +24,7 @@ export default function Button({ children, variant = "primary", size = "md", cla
   return (
     <button
       className={cn(
-        "inline-flex items-center justify-center gap-2 rounded-xl font-bold transition-all focus-visible:outline-2 focus-visible:outline-[#FF5722] focus-visible:outline-offset-2 disabled:opacity-60 disabled:cursor-not-allowed",
+        "inline-flex items-center justify-center gap-2 rounded-xl font-bold transition-all focus-visible:outline-2 focus-visible:outline-[#F5811F] focus-visible:outline-offset-2 disabled:opacity-60 disabled:cursor-not-allowed",
         variants[variant],
         sizes[size],
         className

@@ -2,16 +2,17 @@
 import { useState, useEffect } from 'react';
 import Link from 'next/link';
 import { usePathname } from 'next/navigation';
-import { Search, ShoppingCart, Menu, X, ChevronDown, Leaf, Package, Home, Phone, Info } from 'lucide-react';
+import Image from 'next/image';
+import { Search, ShoppingCart, Menu, X, ChevronDown } from 'lucide-react';
 import { useCartStore } from '@/lib/cart';
 import AnnouncementBar from './AnnouncementBar';
 import MobileNav from './MobileNav';
 
 const navLinks = [
-  { href: '/', label: 'Home', icon: Home },
-  { href: '/shop', label: 'Shop', icon: Package },
-  { href: '/about', label: 'About', icon: Info },
-  { href: '/contact', label: 'Contact', icon: Phone },
+  { href: '/', label: 'Home' },
+  { href: '/shop', label: 'Shop' },
+  { href: '/about', label: 'About' },
+  { href: '/contact', label: 'Contact' },
 ];
 
 export default function Header() {
@@ -52,13 +53,16 @@ export default function Header() {
         <div className="container">
           <div style={{ display:'flex', alignItems:'center', justifyContent:'space-between', height:'72px', gap:'2rem' }}>
 
-            {/* Logo */}
-            <Link href="/" style={{ textDecoration:'none', flexShrink:0 }}>
-              <span style={{ fontFamily:'var(--font-heading)', fontSize:'clamp(18px,2.5vw,24px)', fontWeight:900, letterSpacing:'-0.02em' }}>
-                <span style={{ color:'#FF5722' }}>Home</span>
-                <span style={{ color: scrolled ? '#00BCD4' : '#0F0F1A' }}>Picks</span>
-                <span style={{ color: scrolled ? 'rgba(255,255,255,0.7)' : '#0F0F1A' }}>Daily</span>
-              </span>
+            {/* Logo — use real logo.png */}
+            <Link href="/" style={{ display:'flex', alignItems:'center', flexShrink:0 }}>
+              <Image
+                src="/logo.png"
+                alt="HomePicksDaily"
+                width={160}
+                height={48}
+                style={{ objectFit:'contain', height:'42px', width:'auto' }}
+                priority
+              />
             </Link>
 
             {/* Desktop Nav */}
@@ -72,8 +76,8 @@ export default function Header() {
                   fontWeight: 500,
                   fontFamily:'var(--font-body)',
                   color: pathname === href
-                    ? '#FF5722'
-                    : scrolled ? 'rgba(255,255,255,0.85)' : '#0F0F1A',
+                    ? '#F5811F'
+                    : scrolled ? 'rgba(255,255,255,0.85)' : '#0F1923',
                   transition:'all 0.2s ease',
                   position:'relative',
                 }}>
@@ -86,7 +90,7 @@ export default function Header() {
                 fontSize:'0.9375rem',
                 fontWeight:500,
                 fontFamily:'var(--font-body)',
-                color: scrolled ? 'rgba(255,255,255,0.85)' : '#0F0F1A',
+                color: scrolled ? 'rgba(255,255,255,0.85)' : '#0F1923',
                 display:'flex', alignItems:'center', gap:'0.25rem',
               }}>
                 Categories <ChevronDown size={14} />
@@ -103,7 +107,7 @@ export default function Header() {
                   borderRadius:'50%',
                   display:'flex', alignItems:'center', justifyContent:'center',
                   background: scrolled ? 'rgba(255,255,255,0.1)' : 'rgba(15,15,26,0.06)',
-                  color: scrolled ? 'white' : '#0F0F1A',
+                  color: scrolled ? 'white' : '#0F1923',
                   transition:'all 0.2s ease',
                 }}
               >
@@ -118,10 +122,10 @@ export default function Header() {
                   width:'40px', height:'40px',
                   borderRadius:'50%',
                   display:'flex', alignItems:'center', justifyContent:'center',
-                  background: '#FF5722',
+                  background: '#F5811F',
                   color:'white',
                   transition:'all 0.2s ease',
-                  boxShadow:'0 4px 16px rgba(255,87,34,0.35)',
+                  boxShadow:'0 4px 16px rgba(245,129,31,0.35)',
                 }}
               >
                 <ShoppingCart size={18} />
@@ -150,7 +154,7 @@ export default function Header() {
                   borderRadius:'50%',
                   display:'flex', alignItems:'center', justifyContent:'center',
                   background: scrolled ? 'rgba(255,255,255,0.1)' : 'rgba(15,15,26,0.06)',
-                  color: scrolled ? 'white' : '#0F0F1A',
+                  color: scrolled ? 'white' : '#0F1923',
                 }}
               >
                 <Menu size={20} />
@@ -178,19 +182,19 @@ export default function Header() {
                     flex:1,
                     padding:'0.75rem 1rem',
                     borderRadius:'0.625rem',
-                    border: '2px solid #FF5722',
+                    border: '2px solid #F5811F',
                     fontSize:'0.9375rem',
                     fontFamily:'var(--font-body)',
                     outline:'none',
                     background: scrolled ? 'rgba(255,255,255,0.1)' : 'white',
-                    color: scrolled ? 'white' : '#0F0F1A',
+                    color: scrolled ? 'white' : '#0F1923',
                   }}
                 />
                 <button type="submit" className="btn btn-primary" style={{ padding:'0.75rem 1.25rem' }}>
                   <Search size={18} />
                 </button>
                 <button type="button" onClick={() => setSearchOpen(false)}
-                  style={{ color: scrolled ? 'white' : '#0F0F1A', padding:'0 0.5rem' }}>
+                  style={{ color: scrolled ? 'white' : '#0F1923', padding:'0 0.5rem' }}>
                   <X size={20} />
                 </button>
               </form>

@@ -40,12 +40,12 @@ function CountUp({ target, suffix, decimal }: { target: number; suffix: string; 
 
   const display = decimal ? (count / 10).toFixed(1) : count;
 
-  return <span ref={ref} style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 900, color: '#FF5722' }}>{display}{suffix}</span>;
+  return <span ref={ref} style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2.5rem, 5vw, 3.5rem)', fontWeight: 900, color: '#F5811F' }}>{display}{suffix}</span>;
 }
 
 export default function StatsSection() {
   return (
-    <section style={{ background: '#0F0F1A', padding: '5rem 0' }}>
+    <section style={{ background: '#0F1923', padding: '5rem 0' }}>
       <div className="container">
         <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '2rem' }}>
           {stats.map(s => (

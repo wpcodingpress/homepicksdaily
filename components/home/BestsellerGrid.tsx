@@ -33,7 +33,7 @@ export default function BestsellerGrid({ initialProducts }: BestsellerGridProps)
           </div>
           <Link href="/shop" style={{
             display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
-            fontSize: '0.875rem', fontWeight: 600, color: '#FF5722',
+            fontSize: '0.875rem', fontWeight: 600, color: '#F5811F',
             whiteSpace: 'nowrap',
           }}>View All &rarr;</Link>
         </div>
@@ -45,9 +45,9 @@ export default function BestsellerGrid({ initialProducts }: BestsellerGridProps)
                 padding: '0.5rem 1.25rem', borderRadius: '2rem',
                 fontSize: '0.875rem', fontWeight: 700, fontFamily: 'var(--font-heading)',
                 border: activeTab === tab.label ? 'none' : '1px solid #E2E8F0',
-                background: activeTab === tab.label ? '#FF5722' : 'white',
+                background: activeTab === tab.label ? '#F5811F' : 'white',
                 color: activeTab === tab.label ? 'white' : '#64748B',
-                boxShadow: activeTab === tab.label ? '0 2px 12px rgba(255,87,34,0.3)' : 'none',
+                boxShadow: activeTab === tab.label ? '0 2px 12px rgba(245,129,31,0.3)' : 'none',
                 transition: 'all 0.2s ease',
                 cursor: 'pointer',
               }}>

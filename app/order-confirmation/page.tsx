@@ -18,12 +18,12 @@ export default async function OrderConfirmationPage({ searchParams }: Props) {
     <section style={{ background: '#F8FAFC', padding: '6rem 0' }}>
       <div className="container" style={{ textAlign: 'center' }}>
         <CheckCircle size={80} color="#10B981" style={{ margin: '0 auto 1.5rem' }} />
-        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', fontWeight: 800, color: '#0F0F1A', marginBottom: '0.75rem' }}>
+        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', fontWeight: 800, color: '#0F1923', marginBottom: '0.75rem' }}>
           Order Confirmed!
         </h1>
         {orderId && (
           <p style={{ color: '#64748B', fontSize: '1.0625rem', marginBottom: '0.5rem' }}>
-            Your order <strong style={{ color: '#0F0F1A' }}>#{orderId}</strong> has been placed successfully.
+            Your order <strong style={{ color: '#0F1923' }}>#{orderId}</strong> has been placed successfully.
           </p>
         )}
         <p style={{ color: '#64748B', fontSize: '0.9375rem', marginBottom: '2rem' }}>

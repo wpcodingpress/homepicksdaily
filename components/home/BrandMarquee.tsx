@@ -11,7 +11,7 @@ const items = [
 
 export default function BrandMarquee() {
   return (
-    <div className="overflow-hidden bg-[#FF5722] py-3">
+    <div className="overflow-hidden bg-[#F5811F] py-3">
       <div className="flex animate-marquee gap-12 whitespace-nowrap">
         {[...items, ...items].map((item, i) => (
           <span key={i} className="inline-flex items-center gap-2 text-white">

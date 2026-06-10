@@ -37,9 +37,9 @@ export function Toaster() {
   if (toasts.length === 0) return null;
 
   const typeStyles: Record<string, string> = {
-    success: "bg-[#FF5722] text-white",
+    success: "bg-[#F5811F] text-white",
     error: "bg-red-500 text-white",
-    info: "bg-[#0F0F1A] text-white",
+    info: "bg-[#0F1923] text-white",
   };
 
   return (

@@ -24,14 +24,14 @@ export default function HowItWorks() {
           {/* Connector line */}
           <div style={{
             position: 'absolute', left: '16%', right: '16%', top: '36px',
-            borderTop: '2px dashed #FF5722', opacity: 0.3,
+            borderTop: '2px dashed #F5811F', opacity: 0.3,
           }} className="hidden md:block" />
 
           {steps.map(({ icon: Icon, title, desc }, i) => (
             <div key={title} style={{ textAlign: 'center', position: 'relative' }}>
               <div style={{
                 width: '72px', height: '72px', borderRadius: '50%',
-                background: '#FF5722', color: 'white',
+                background: '#F5811F', color: 'white',
                 display: 'flex', alignItems: 'center', justifyContent: 'center',
                 margin: '0 auto 1rem',
                 fontFamily: 'var(--font-heading)',
@@ -42,7 +42,7 @@ export default function HowItWorks() {
               <div style={{ color: '#00BCD4', marginBottom: '1rem', display: 'flex', justifyContent: 'center' }}>
                 <Icon size={32} />
               </div>
-              <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.25rem', color: '#0F0F1A', marginBottom: '0.5rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.25rem', color: '#0F1923', marginBottom: '0.5rem' }}>
                 {title}
               </h3>
               <p style={{ fontSize: '0.9375rem', color: '#64748B', lineHeight: 1.7 }}>{desc}</p>

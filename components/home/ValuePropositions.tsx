@@ -24,14 +24,14 @@ export default function ValuePropositions() {
               }}>
                 <Icon size={24} />
               </div>
-              <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.125rem', color: '#0F0F1A', marginBottom: '0.5rem' }}>
+              <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.125rem', color: '#0F1923', marginBottom: '0.5rem' }}>
                 {title}
               </h3>
               <p style={{ fontSize: '0.875rem', color: '#64748B', lineHeight: 1.7 }}>{desc}</p>
               <span style={{
                 display: 'inline-flex', alignItems: 'center', gap: '0.25rem',
                 marginTop: '0.75rem', fontSize: '0.8125rem', fontWeight: 600,
-                color: '#FF5722',
+                color: '#F5811F',
               }}>
                 Learn more <ArrowRight size={14} />
               </span>

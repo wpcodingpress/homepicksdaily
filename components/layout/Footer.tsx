@@ -1,6 +1,7 @@
 'use client';
+import Image from 'next/image';
 import Link from 'next/link';
-import { Leaf, Mail, Phone, Clock, Heart, Truck, Shield } from 'lucide-react';
+import { Mail, Phone, Clock, Heart, Truck, Shield, Leaf } from 'lucide-react';
 
 const shopLinks = ['All Products', 'Kitchen', 'Bathroom', 'Laundry', 'Cleaning Tools', 'Eco-Friendly'];
 const infoLinks = ['About Us', 'Contact', 'FAQs', 'Shipping Policy', 'Returns', 'Privacy Policy'];
@@ -30,7 +31,7 @@ export default function Footer() {
   const year = new Date().getFullYear();
 
   return (
-    <footer style={{ background:'#0F0F1A', color:'rgba(255,255,255,0.85)' }}>
+    <footer style={{ background:'#0F1923', color:'rgba(255,255,255,0.85)' }}>
       {/* Trust bar */}
       <div style={{ borderBottom:'1px solid rgba(255,255,255,0.06)', padding:'1.5rem 0' }}>
         <div className="container">
@@ -44,9 +45,9 @@ export default function Footer() {
               <div key={i} style={{ display:'flex', alignItems:'center', gap:'0.75rem', justifyContent:'center' }}>
                 <div style={{
                   width:'42px', height:'42px', borderRadius:'50%',
-                  background:'rgba(255,87,34,0.15)',
+                  background:'rgba(245,129,31,0.15)',
                   display:'flex', alignItems:'center', justifyContent:'center',
-                  color:'#FF5722', flexShrink:0,
+                  color:'#F5811F', flexShrink:0,
                 }}>
                   <Icon size={20} />
                 </div>
@@ -65,12 +66,14 @@ export default function Footer() {
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(200px, 1fr))', gap:'2.5rem' }}>
           {/* Brand */}
           <div>
-            <Link href="/" style={{ display:'flex', alignItems:'center', gap:'0.5rem', marginBottom:'1.25rem', textDecoration:'none' }}>
-              <Leaf size={24} color="#00BCD4" />
-              <span style={{ fontFamily:'var(--font-heading)', fontWeight:900, fontSize:'1.25rem' }}>
-                <span style={{ color:'#FF5722' }}>Home</span>
-                <span style={{ color:'white' }}>PicksDaily</span>
-              </span>
+            <Link href="/" style={{ display:'flex', alignItems:'center', marginBottom:'1.25rem', textDecoration:'none' }}>
+              <Image
+                src="/logo.png"
+                alt="HomePicksDaily"
+                width={160}
+                height={48}
+                style={{ objectFit:'contain', height:'44px', width:'auto', filter:'brightness(0) invert(1)' }}
+              />
             </Link>
             <p style={{ fontSize:'0.875rem', lineHeight:1.7, color:'rgba(255,255,255,0.55)', marginBottom:'1.25rem' }}>
               Your go-to store for eco-friendly home and cleaning essentials. Sustainable, effective, and affordable.
@@ -130,11 +133,11 @@ export default function Footer() {
                 <li key={i}>
                   {href ? (
                     <a href={href} style={{ display:'flex', alignItems:'center', gap:'0.625rem', fontSize:'0.875rem', color:'rgba(255,255,255,0.55)' }}>
-                      <Icon size={16} color="#FF5722" /> {label}
+                      <Icon size={16} color="#F5811F" /> {label}
                     </a>
                   ) : (
                     <span style={{ display:'flex', alignItems:'center', gap:'0.625rem', fontSize:'0.875rem', color:'rgba(255,255,255,0.55)' }}>
-                      <Icon size={16} color="#FF5722" /> {label}
+                      <Icon size={16} color="#F5811F" /> {label}
                     </span>
                   )}
                 </li>
@@ -147,7 +150,7 @@ export default function Footer() {
       {/* Bottom bar */}
       <div style={{ borderTop:'1px solid rgba(255,255,255,0.06)', padding:'1.25rem 0' }}>
         <div className="container" style={{ display:'flex', alignItems:'center', justifyContent:'center', gap:'0.375rem', fontSize:'0.8125rem', color:'rgba(255,255,255,0.4)' }}>
-          <Heart size={14} color="#FF5722" fill="#FF5722" />
+          <Heart size={14} color="#F5811F" fill="#F5811F" />
           <span>&copy; {year} HomePicksDaily. All rights reserved.</span>
         </div>
       </div>

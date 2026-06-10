@@ -15,11 +15,11 @@ export default function ProductBreadcrumb({
 
   return (
     <nav className="flex items-center gap-2 text-sm text-[#6B7280]">
-      <Link href="/" className="transition-colors hover:text-[#FF5722]">
+      <Link href="/" className="transition-colors hover:text-[#F5811F]">
         Home
       </Link>
       <ChevronRight className="w-4 h-4" />
-      <Link href="/shop" className="transition-colors hover:text-[#FF5722]">
+      <Link href="/shop" className="transition-colors hover:text-[#F5811F]">
         Shop
       </Link>
       {primary && (
@@ -27,14 +27,14 @@ export default function ProductBreadcrumb({
           <ChevronRight className="w-4 h-4" />
           <Link
             href={`/category/${primary.slug}`}
-            className="transition-colors hover:text-[#FF5722]"
+            className="transition-colors hover:text-[#F5811F]"
           >
             {decodeHtml(primary.name)}
           </Link>
         </>
       )}
       <ChevronRight className="w-4 h-4" />
-      <span className="text-[#1C1C2E] line-clamp-1">{productName}</span>
+      <span className="text-[#0F1923] line-clamp-1">{productName}</span>
     </nav>
   );
 }

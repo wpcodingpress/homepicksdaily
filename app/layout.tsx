@@ -4,12 +4,11 @@ import './globals.css';
 import Header from '@/components/layout/Header';
 import Footer from '@/components/layout/Footer';
 import CartDrawer from '@/components/cart/CartDrawer';
-import { Toaster } from '@/components/ui/Toast';
 
 const outfit = Outfit({
   subsets: ['latin'],
   variable: '--font-heading',
-  weight: ['400', '500', '600', '700', '800', '900'],
+  weight: ['400','500','600','700','800','900'],
   display: 'swap',
 });
 
@@ -21,14 +20,17 @@ const inter = Inter({
 
 export const metadata: Metadata = {
   title: 'HomePicksDaily — Eco-Friendly Home & Cleaning Products',
-  description: 'Discover 500+ eco-friendly home and cleaning products. Sustainable, effective, and affordable essentials for a cleaner, greener home.',
+  description: 'Discover 500+ eco-friendly home and cleaning products. Sustainable, effective, and affordable.',
   metadataBase: new URL(process.env.NEXT_PUBLIC_SITE_URL ?? 'https://homepicksdaily.com'),
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico',
+    apple: '/favicon.ico',
+  },
   openGraph: {
     type: 'website',
-    locale: 'en_US',
-    url: 'https://homepicksdaily.com',
     siteName: 'HomePicksDaily',
-    images: [{ url: '/og-image.jpg', width: 1200, height: 630 }],
+    images: [{ url: '/home-page-header-desktop.gif', width: 1200, height: 630 }],
   },
 };
 
@@ -40,7 +42,6 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         <main>{children}</main>
         <Footer />
         <CartDrawer />
-        <Toaster />
       </body>
     </html>
   );

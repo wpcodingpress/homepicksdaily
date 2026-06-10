@@ -40,7 +40,7 @@ const inputStyle: React.CSSProperties = {
 
 const labelStyle: React.CSSProperties = {
   display: 'block', fontSize: '0.875rem', fontWeight: 500,
-  color: '#0F0F1A', marginBottom: '0.25rem', textTransform: 'capitalize',
+  color: '#0F1923', marginBottom: '0.25rem', textTransform: 'capitalize',
 };
 
 export default function CheckoutPageClient() {
@@ -79,7 +79,7 @@ export default function CheckoutPageClient() {
     return (
       <section style={{ padding: '6rem 0' }}>
         <div className="container" style={{ textAlign: 'center' }}>
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 700, color: '#0F0F1A' }}>Your cart is empty</h1>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: '1.75rem', fontWeight: 700, color: '#0F1923' }}>Your cart is empty</h1>
           <Link href="/shop" className="btn btn-primary" style={{ marginTop: '1rem' }}>Shop Now</Link>
         </div>
       </section>
@@ -95,10 +95,10 @@ export default function CheckoutPageClient() {
           <span>/</span>
           <Link href="/cart" style={{ color: 'inherit' }}>Cart</Link>
           <span>/</span>
-          <span style={{ color: '#0F0F1A', fontWeight: 600 }}>Checkout</span>
+          <span style={{ color: '#0F1923', fontWeight: 600 }}>Checkout</span>
         </div>
 
-        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#0F0F1A', marginBottom: '2rem' }}>
+        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#0F1923', marginBottom: '2rem' }}>
           Checkout
         </h1>
 
@@ -106,7 +106,7 @@ export default function CheckoutPageClient() {
           {/* Form */}
           <form onSubmit={handleSubmit(onSubmit)}>
             <div style={{ background: 'white', borderRadius: '1.25rem', padding: '1.5rem', border: '1px solid #E2E8F0' }}>
-              <h2 style={{ borderLeft: '4px solid #FF5722', paddingLeft: '0.75rem', fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.125rem', color: '#0F0F1A', marginBottom: '1.5rem' }}>
+              <h2 style={{ borderLeft: '4px solid #F5811F', paddingLeft: '0.75rem', fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.125rem', color: '#0F1923', marginBottom: '1.5rem' }}>
                 Billing Information
               </h2>
               <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))', gap: '1rem' }}>

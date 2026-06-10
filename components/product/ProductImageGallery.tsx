@@ -35,7 +35,7 @@ export default function ProductImageGallery({
               key={img.id}
               onClick={() => setSelected(i)}
               className={`relative h-20 w-20 flex-shrink-0 overflow-hidden rounded-xl border-2 transition-colors ${
-                i === selected ? "border-[#FF5722]" : "border-transparent hover:border-gray-200"
+                i === selected ? "border-[#F5811F]" : "border-transparent hover:border-gray-200"
               }`}
             >
               <Image

@@ -12,7 +12,7 @@ export default function CartSummary() {
 
   return (
     <div className="rounded-2xl bg-white p-6 shadow-lg">
-      <h3 className="mb-4 font-heading text-lg font-bold text-[#1C1C2E]">
+      <h3 className="mb-4 font-heading text-lg font-bold text-[#0F1923]">
         Order Summary
       </h3>
       <div className="space-y-3 text-sm">
@@ -37,7 +37,7 @@ export default function CartSummary() {
         )}
       </div>
       <div className="mt-4 border-t border-gray-100 pt-4">
-        <div className="flex justify-between text-lg font-bold text-[#1C1C2E]">
+        <div className="flex justify-between text-lg font-bold text-[#0F1923]">
           <span>Total</span>
           <span>{formatPrice(subtotal + shipping)}</span>
         </div>

@@ -3,9 +3,9 @@ import { Home, ShoppingBag } from 'lucide-react';
 
 export default function NotFound() {
   return (
-    <section style={{ background: '#0F0F1A', padding: '8rem 0', textAlign: 'center' }}>
+    <section style={{ background: '#0F1923', padding: '8rem 0', textAlign: 'center' }}>
       <div className="container">
-        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(5rem, 10vw, 120px)', fontWeight: 900, color: '#FF5722', lineHeight: 1 }}>
+        <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(5rem, 10vw, 120px)', fontWeight: 900, color: '#F5811F', lineHeight: 1 }}>
           404
         </h1>
 

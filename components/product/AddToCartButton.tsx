@@ -54,7 +54,7 @@ export default function AddToCartButton({
       disabled={stockStatus !== "instock"}
       className={`flex w-full items-center justify-center gap-2 rounded-xl py-3.5 font-bold text-white transition-all ${
         stockStatus === "instock"
-          ? "bg-[#FF5722] hover:bg-[#FF7043]"
+          ? "bg-[#F5811F] hover:bg-[#FF7043]"
           : "cursor-not-allowed bg-gray-400"
       }`}
     >

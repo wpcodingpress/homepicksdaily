@@ -1,98 +1,97 @@
-import type { Metadata } from 'next';
+import PageHeader from '@/components/ui/PageHeader';
+import { Leaf, Award, Users, Heart, CheckCircle } from 'lucide-react';
 import Image from 'next/image';
-import { Leaf, Shield, Heart } from 'lucide-react';
 
-export const metadata: Metadata = {
-  title: 'About Us',
-  description: 'Learn about HomePicksDaily — our mission, values, and commitment to eco-friendly home products.',
+export const metadata = {
+  title: 'About Us | HomePicksDaily',
+  description: 'Learn about our mission to bring eco-friendly home products to every household.',
 };
-
-const values = [
-  { icon: Leaf, title: 'Eco-Friendly First', desc: 'Every product meets our strict sustainability standards. We partner with brands who share our commitment to the planet.' },
-  { icon: Shield, title: 'Quality Guaranteed', desc: 'We personally test every product in our collection. If it does not meet our standards, it does not make it to our store.' },
-  { icon: Heart, title: 'Customer Obsessed', desc: 'Your satisfaction drives everything we do. From packaging to support, we put our customers first.' },
-];
 
 export default function AboutPage() {
   return (
     <>
-      {/* Hero Banner */}
-      <section style={{ background: '#0F0F1A', padding: '5rem 0' }}>
-        <div className="container">
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(2rem, 4vw, 3rem)', fontWeight: 800, color: 'white', marginBottom: '1rem' }}>
-            About HomePicksDaily
-          </h1>
-          <p style={{ fontSize: '1.125rem', color: 'rgba(255,255,255,0.6)', maxWidth: '560px' }}>
-            Our mission: make eco-friendly living accessible, affordable, and effortless for every home.
-          </p>
-        </div>
-      </section>
+      <PageHeader
+        title="About Us"
+        subtitle="We keep it fresh, neat, and vibrant all year round."
+        backgroundImage="/about-page-header.jpg"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'About Us' },
+        ]}
+      />
 
-      {/* Mission Section */}
-      <section style={{ padding: '5rem 0' }}>
+      {/* Mission */}
+      <section className="section" style={{ background: 'white' }}>
         <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(300px, 1fr))', gap:'4rem', alignItems:'center' }}>
             <div>
               <span className="section-eyebrow">Our Mission</span>
-              <h2 className="section-title">A Cleaner Home, A Greener Planet</h2>
-              <p style={{ color: '#64748B', lineHeight: 1.8, marginBottom: '1rem' }}>
-                At HomePicksDaily, we believe that a clean home should not come at the cost of a clean planet. We carefully curate every product in our collection — from reusable cleaning tools to biodegradable household essentials — so you can shop with confidence, knowing each item meets our standards for quality and sustainability.
+              <h2 className="section-title">Making Eco-Friendly Living Easy & Affordable</h2>
+              <p style={{ color:'var(--color-text-muted)', lineHeight:1.8, marginBottom:'1.5rem' }}>
+                HomePicksDaily was founded with a simple belief: everyone deserves access to high-quality, eco-friendly home products without breaking the bank.
               </p>
-              <p style={{ color: '#64748B', lineHeight: 1.8 }}>
-                Whether you are taking your first steps toward a zero-waste lifestyle or looking to replace your current cleaning arsenal with sustainable alternatives, HomePicksDaily is here to help.
+              <p style={{ color:'var(--color-text-muted)', lineHeight:1.8, marginBottom:'2rem' }}>
+                We curate the best sustainable home and cleaning products from trusted global suppliers, so you can shop confidently knowing every item meets our strict quality and environmental standards.
               </p>
+              <div style={{ display:'flex', flexDirection:'column', gap:'1rem' }}>
+                {[
+                  'Safe for kids, pets, and the entire family',
+                  'Refillable and recyclable packaging',
+                  'Sourced from eco-certified suppliers',
+                  '30-day satisfaction guarantee on every order',
+                ].map(item => (
+                  <div key={item} style={{ display:'flex', alignItems:'flex-start', gap:'0.75rem' }}>
+                    <CheckCircle size={20} style={{ color:'#F5811F', flexShrink:0, marginTop:'2px' }} />
+                    <span style={{ fontFamily:'var(--font-body)', color:'var(--color-text)', fontSize:'0.9375rem' }}>
+                      {item}
+                    </span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <div style={{ position: 'relative', aspectRatio: '4/3', borderRadius: '1.25rem', overflow: 'hidden' }}>
-              <Image src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=800&q=80" alt="Eco-friendly mission" fill style={{ objectFit: 'cover' }} loading="lazy" />
+            <div style={{ position:'relative', borderRadius:'1.5rem', overflow:'hidden', aspectRatio:'4/3' }}>
+              <Image
+                src="https://images.unsplash.com/photo-1542601906990-b4d3fb778b09?w=600&q=80&auto=format&fit=crop"
+                alt="Our eco mission"
+                fill
+                className="object-cover"
+              />
             </div>
           </div>
         </div>
       </section>
 
       {/* Values */}
-      <section style={{ background: '#F1F5F9', padding: '5rem 0' }}>
+      <section className="section" style={{ background:'var(--color-light-muted)' }}>
         <div className="container">
-          <div style={{ textAlign: 'center', marginBottom: '3rem' }}>
+          <div style={{ textAlign:'center', marginBottom:'3rem' }}>
             <span className="section-eyebrow">Our Values</span>
-            <h2 className="section-title" style={{ margin: '0 auto' }}>What We Stand For</h2>
+            <h2 className="section-title">What We Stand For</h2>
           </div>
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))', gap: '2rem' }}>
-            {values.map(v => (
-              <div key={v.title} className="card" style={{ padding: '2rem' }}>
+          <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit, minmax(220px, 1fr))', gap:'1.5rem' }}>
+            {[
+              { icon: Leaf, title:'Sustainability', desc:'Every product chosen for minimal environmental impact', color:'#22C55E' },
+              { icon: Award, title:'Quality First', desc:'Rigorous testing before any product reaches our store', color:'#F5811F' },
+              { icon: Users, title:'Community', desc:'10,000+ happy customers and growing every day', color:'#1B3F72' },
+              { icon: Heart, title:'Care', desc:'Safe for your family, your pets, and the planet', color:'#EF4444' },
+            ].map(({ icon: Icon, title, desc, color }) => (
+              <div key={title} className="card" style={{ padding:'2rem', textAlign:'center' }}>
                 <div style={{
-                  width: '56px', height: '56px', borderRadius: '50%',
-                  background: 'rgba(255,87,34,0.1)', color: '#FF5722',
-                  display: 'flex', alignItems: 'center', justifyContent: 'center',
-                  marginBottom: '1.25rem',
+                  width:'64px', height:'64px', borderRadius:'50%',
+                  background:`${color}18`,
+                  display:'flex', alignItems:'center', justifyContent:'center',
+                  margin:'0 auto 1.25rem',
                 }}>
-                  <v.icon size={28} />
+                  <Icon size={28} style={{ color }} />
                 </div>
-                <h3 style={{ fontFamily: 'var(--font-heading)', fontWeight: 700, fontSize: '1.25rem', color: '#0F0F1A', marginBottom: '0.75rem' }}>
-                  {v.title}
+                <h3 style={{ fontFamily:'var(--font-heading)', fontWeight:700, fontSize:'1.125rem', marginBottom:'0.5rem' }}>
+                  {title}
                 </h3>
-                <p style={{ color: '#64748B', lineHeight: 1.7, fontSize: '0.9375rem' }}>{v.desc}</p>
+                <p style={{ color:'var(--color-text-muted)', fontSize:'0.9rem', lineHeight:1.6 }}>
+                  {desc}
+                </p>
               </div>
             ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Team */}
-      <section style={{ background: '#0F0F1A', padding: '5rem 0' }}>
-        <div className="container">
-          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(300px, 1fr))', gap: '3rem', alignItems: 'center' }}>
-            <div style={{ position: 'relative', aspectRatio: '4/3', borderRadius: '1.25rem', overflow: 'hidden' }}>
-              <Image src="https://images.unsplash.com/photo-1542744173-8e7e53415bb0?w=800&q=80" alt="Our team" fill style={{ objectFit: 'cover' }} loading="lazy" />
-            </div>
-            <div>
-              <span className="section-eyebrow">Our Team</span>
-              <h2 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.75rem, 3vw, 2.5rem)', fontWeight: 800, color: 'white', marginBottom: '1rem' }}>
-                Passionate About Sustainability
-              </h2>
-              <p style={{ color: 'rgba(255,255,255,0.6)', lineHeight: 1.8 }}>
-                We are a small, dedicated team of eco-enthusiasts based across the US. From product sourcing to customer support, every member of our team is committed to making sustainable living simple and accessible.
-              </p>
-            </div>
           </div>
         </div>
       </section>

@@ -34,12 +34,12 @@ export default function CartDrawer() {
         }`}
       >
         <div className="flex items-center justify-between border-b border-gray-100 px-4 py-4">
-          <h2 className="font-heading text-lg font-bold text-[#1C1C2E]">
+          <h2 className="font-heading text-lg font-bold text-[#0F1923]">
             Cart ({items.length})
           </h2>
           <button
             onClick={closeCart}
-            className="flex h-8 w-8 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-100 hover:text-[#1C1C2E]"
+            className="flex h-8 w-8 items-center justify-center rounded-full text-gray-400 transition-colors hover:bg-gray-100 hover:text-[#0F1923]"
             aria-label="Close cart"
           >
             <X className="w-5 h-5" />
@@ -53,7 +53,7 @@ export default function CartDrawer() {
             <Link
               href="/shop"
               onClick={closeCart}
-              className="rounded-lg bg-[#FF5722] px-5 py-2.5 font-bold text-white transition-colors hover:bg-[#FF7043]"
+              className="rounded-lg bg-[#F5811F] px-5 py-2.5 font-bold text-white transition-colors hover:bg-[#FF7043]"
             >
               Shop now
             </Link>
@@ -69,14 +69,14 @@ export default function CartDrawer() {
             </div>
 
             <div className="border-t border-gray-100 px-4 py-4">
-              <div className="flex items-center justify-between text-lg font-bold text-[#1C1C2E]">
+              <div className="flex items-center justify-between text-lg font-bold text-[#0F1923]">
                 <span>Total</span>
                 <span>{formatPrice(total())}</span>
               </div>
               <Link
                 href="/checkout"
                 onClick={closeCart}
-                className="mt-3 flex w-full items-center justify-center rounded-lg bg-[#FF5722] py-3 font-bold text-white transition-colors hover:bg-[#FF7043]"
+                className="mt-3 flex w-full items-center justify-center rounded-lg bg-[#F5811F] py-3 font-bold text-white transition-colors hover:bg-[#FF7043]"
               >
                 Checkout
               </Link>

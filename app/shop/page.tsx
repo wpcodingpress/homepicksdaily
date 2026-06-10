@@ -1,6 +1,6 @@
 import { Suspense } from 'react';
-import Link from 'next/link';
 import type { Metadata } from 'next';
+import PageHeader from '@/components/ui/PageHeader';
 import { getProducts } from '@/lib/woocommerce';
 import ProductGrid from '@/components/product/ProductGrid';
 import ProductCardSkeleton from '@/components/ui/Skeleton';
@@ -8,11 +8,10 @@ import ShopFilters from '@/components/shop/ShopFilters';
 import SortDropdown from '@/components/shop/SortDropdown';
 import ActiveFilterTags from '@/components/shop/ActiveFilterTags';
 import Pagination from '@/components/shop/Pagination';
-import { Home, ChevronRight } from 'lucide-react';
 
 export const metadata: Metadata = {
-  title: 'Shop All Products',
-  description: 'Browse our full collection of eco-friendly home and cleaning products.',
+  title: 'Shop All Products | HomePicksDaily',
+  description: 'Explore our full range of eco-friendly home essentials.',
 };
 
 interface ShopPageProps {
@@ -41,25 +40,19 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
 
   return (
     <>
-      {/* Banner */}
-      <section style={{ background: '#0F0F1A', padding: '3rem 0' }}>
-        <div className="container">
-          <div style={{ display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem', color: 'rgba(255,255,255,0.5)', marginBottom: '0.75rem' }}>
-            <Link href="/" style={{ color: 'inherit' }}><Home size={16} /></Link>
-            <ChevronRight size={14} />
-            <span style={{ color: 'rgba(255,255,255,0.85)' }}>Shop</span>
-          </div>
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.75rem, 4vw, 2.75rem)', fontWeight: 800, color: 'white' }}>
-            Our Products
-          </h1>
-        </div>
-      </section>
+      <PageHeader
+        title="Our Products"
+        subtitle="Explore our full range of eco-friendly home essentials"
+        backgroundImage="/home-page-header-desktop.gif"
+        breadcrumbs={[
+          { label: 'Home', href: '/' },
+          { label: 'Shop' },
+        ]}
+      />
 
-      {/* Content */}
       <section style={{ padding: '2rem 0' }}>
         <div className="container">
           <div style={{ display: 'flex', flexDirection: 'column', gap: '1.5rem' }}>
-            {/* Filters + Sort */}
             <div style={{ display: 'flex', alignItems: 'flex-start', justifyContent: 'space-between', gap: '1rem', flexWrap: 'wrap' }}>
               <div style={{ flex: 1, minWidth: '200px' }}>
                 <ShopFilters />
@@ -70,12 +63,10 @@ export default async function ShopPage({ searchParams }: ShopPageProps) {
               </div>
             </div>
 
-            {/* Grid */}
             <Suspense fallback={<SkeletonGrid />}>
               <ProductGrid products={products} />
             </Suspense>
 
-            {/* Pagination */}
             <Pagination currentPage={parseInt(page, 10)} totalPages={totalPages} basePath="/shop" searchParams={sp as Record<string, string>} />
           </div>
         </div>

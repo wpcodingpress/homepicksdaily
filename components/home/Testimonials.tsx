@@ -47,20 +47,20 @@ export default function Testimonials() {
                     <Star key={j} size={16} fill="#F59E0B" color="#F59E0B" />
                   ))}
                 </div>
-                <p style={{ flex: 1, fontSize: '0.875rem', lineHeight: 1.7, color: '#0F0F1A', fontStyle: 'italic' }}>
+                <p style={{ flex: 1, fontSize: '0.875rem', lineHeight: 1.7, color: '#0F1923', fontStyle: 'italic' }}>
                   &ldquo;{t.text}&rdquo;
                 </p>
                 <div style={{ display: 'flex', alignItems: 'center', gap: '0.75rem', marginTop: '1.25rem' }}>
                   <div style={{
                     width: '40px', height: '40px', borderRadius: '50%',
-                    background: '#FF5722', color: 'white',
+                    background: '#F5811F', color: 'white',
                     display: 'flex', alignItems: 'center', justifyContent: 'center',
                     fontSize: '0.875rem', fontWeight: 700,
                   }}>
                     {t.initial}
                   </div>
                   <div>
-                    <p style={{ fontSize: '0.875rem', fontWeight: 600, color: '#0F0F1A' }}>{t.name}</p>
+                    <p style={{ fontSize: '0.875rem', fontWeight: 600, color: '#0F1923' }}>{t.name}</p>
                     <p style={{ fontSize: '0.75rem', color: '#10B981', fontWeight: 500 }}>Verified Buyer</p>
                   </div>
                 </div>

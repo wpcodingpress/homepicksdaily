@@ -1,21 +1,21 @@
 @import "tailwindcss";
 
 @theme inline {
-  --color-primary:         #FF5722;
-  --color-primary-hover:   #E64A19;
-  --color-primary-glow:    rgba(255, 87, 34, 0.18);
-  --color-secondary:       #00BCD4;
-  --color-secondary-hover: #0097A7;
-  --color-dark:            #0F0F1A;
-  --color-dark-2:          #1A1A2E;
-  --color-dark-3:          #16213E;
-  --color-dark-card:       #1E1E30;
-  --color-dark-border:     #2A2A40;
+  --color-primary:         #F5811F;
+  --color-primary-hover:   #E06B0A;
+  --color-primary-glow:    rgba(245, 129, 31, 0.2);
+  --color-secondary:       #1B3F72;
+  --color-secondary-hover: #15325A;
+  --color-secondary-light: #2456A0;
+  --color-dark:            #0F1923;
+  --color-dark-2:          #1A2535;
+  --color-dark-card:       #1E2D40;
+  --color-dark-border:     #2A3D55;
   --color-light:           #FFFFFF;
   --color-light-bg:        #F8FAFC;
   --color-light-muted:     #F1F5F9;
   --color-light-border:    #E2E8F0;
-  --color-text:            #0F0F1A;
+  --color-text:            #0F1923;
   --color-text-muted:      #64748B;
   --color-text-light:      #94A3B8;
   --color-gold:            #F59E0B;
@@ -184,7 +184,7 @@ button { cursor: pointer; border: none; background: none; }
 @keyframes count-up { from{opacity:0;transform:scale(0.5)} to{opacity:1;transform:scale(1)} }
 @keyframes pulse-glow {
   0%,100%{box-shadow:0 0 0 0 var(--color-primary-glow)}
-  50%{box-shadow:0 0 0 16px rgba(255,87,34,0)}
+  50%{box-shadow:0 0 0 16px rgba(245,129,31,0)}
 }
 
 .animate-float { animation: float 5s ease-in-out infinite; }
@@ -234,6 +234,31 @@ button { cursor: pointer; border: none; background: none; }
 
 /* FOCUS */
 :focus-visible { outline: 2px solid var(--color-primary); outline-offset: 3px; border-radius: 4px; }
+
+/* MOBILE RESPONSIVE POLISH */
+@media (max-width: 640px) {
+  .container { padding-left: 1rem; padding-right: 1rem; }
+  .section { padding-top: 2.5rem; padding-bottom: 2.5rem; }
+  .section-title { font-size: clamp(1.375rem, 5vw, 1.75rem); }
+  .section-subtitle { font-size: 0.9375rem; }
+  .btn { padding: 0.75rem 1.25rem; font-size: 0.875rem; min-height: 44px; }
+  .card { border-radius: 1rem; }
+  .badge { padding: 0.25rem 0.75rem; font-size: 0.6875rem; }
+}
+
+/* SAFE GRID FALLBACK */
+.grid { min-width: 0; }
+[class*="grid-cols-"] { min-width: 0; }
+[style*="grid-template-columns"] { min-width: 0; }
+
+/* TOUCH TARGETS */
+button, a, select, input[type="submit"], input[type="button"], input[type="reset"] {
+  min-height: 0;
+}
+@media (pointer: coarse) {
+  button, a, select, .btn, [role="button"], input, textarea { min-height: 44px; }
+  .btn { padding-top: 0.75rem; padding-bottom: 0.75rem; }
+}
 
 /* REDUCED MOTION */
 @media (prefers-reduced-motion: reduce) {

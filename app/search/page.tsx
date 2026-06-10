@@ -21,7 +21,7 @@ export default async function SearchPage({ searchParams }: Props) {
     <section style={{ padding: '3rem 0' }}>
       <div className="container">
         <div style={{ marginBottom: '2rem' }}>
-          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#0F0F1A', marginBottom: '0.5rem' }}>
+          <h1 style={{ fontFamily: 'var(--font-heading)', fontSize: 'clamp(1.5rem, 3vw, 2rem)', fontWeight: 800, color: '#0F1923', marginBottom: '0.5rem' }}>
             Search Results
           </h1>
           <p style={{ color: '#64748B' }}>

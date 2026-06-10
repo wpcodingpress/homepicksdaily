@@ -1,6 +1,6 @@
 import Link from "next/link";
 import Image from "next/image";
-import { Star, Heart, ShoppingCart, ChevronRight } from "lucide-react";
+import { Star, Heart, ShoppingCart, ChevronRight } from 'lucide-react';
 import { extractMinPrice } from "@/lib/utils";
 import type { WCProduct } from "@/lib/types";
 
@@ -25,12 +25,12 @@ export default function ProductCard({ product }: ProductCardProps) {
         />
 
         {product.on_sale && (
-          <span className="absolute left-3 top-3 rounded-full bg-[#FF5722] px-2 py-1 text-xs font-bold text-white">
+          <span className="absolute left-3 top-3 rounded-full bg-[#F5811F] px-2 py-1 text-xs font-bold text-white">
             SALE
           </span>
         )}
         {product.featured && !product.on_sale && (
-          <span className="absolute left-3 top-3 rounded-full bg-[#00BCD4] px-2 py-1 text-xs font-bold text-white">
+          <span className="absolute left-3 top-3 rounded-full bg-[#1B3F72] px-2 py-1 text-xs font-bold text-white">
             FEATURED
           </span>
         )}
@@ -45,7 +45,7 @@ export default function ProductCard({ product }: ProductCardProps) {
         <div className="absolute bottom-0 left-0 right-0 translate-y-full transition-transform duration-300 group-hover:translate-y-0">
           <Link
             href={`/shop/${product.slug}`}
-            className="flex items-center justify-center gap-2 bg-[#FF5722] py-3 text-center text-sm font-semibold text-white"
+            className="flex items-center justify-center gap-2 bg-[#F5811F] py-3 text-center text-sm font-semibold text-white"
           >
             <ShoppingCart className="h-4 w-4" />
             {product.type === "variable" ? "View Options" : "Add to Cart"}
@@ -76,17 +76,17 @@ export default function ProductCard({ product }: ProductCardProps) {
 
         <div className="mt-auto flex items-center justify-between">
           {product.type === "variable" ? (
-            <span className="text-base font-bold text-[#FF5722]">
+            <span className="text-base font-bold text-[#F5811F]">
               From ${extractMinPrice(product.price_html)}
             </span>
           ) : (
-            <span className="text-base font-bold text-[#FF5722]">
+            <span className="text-base font-bold text-[#F5811F]">
               ${parseFloat(product.price || "0").toFixed(2)}
             </span>
           )}
           <Link
             href={`/shop/${product.slug}`}
-            className="text-[#00BCD4] transition-colors hover:text-[#0097A7]"
+            className="text-[#1B3F72] transition-colors hover:text-[#0097A7]"
           >
             <ChevronRight className="h-5 w-5" />
           </Link>

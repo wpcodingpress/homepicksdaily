@@ -25,7 +25,7 @@ export default function SortDropdown() {
     <select
       value={current}
       onChange={handleChange}
-      className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#1C1C2E] outline-none focus:ring-2 focus:ring-[#FF5722]"
+      className="rounded-lg border border-gray-200 bg-white px-3 py-2 text-sm text-[#0F1923] outline-none focus:ring-2 focus:ring-[#F5811F]"
     >
       {options.map((opt) => (
         <option key={opt.value} value={opt.value}>

@@ -17,7 +17,7 @@ export default async function RelatedProducts({ relatedIds }: RelatedProductsPro
 
   return (
     <div className="mt-16">
-      <h2 className="mb-6 font-heading text-2xl font-bold text-[#1C1C2E]">
+      <h2 className="mb-6 font-heading text-2xl font-bold text-[#0F1923]">
         Related Products
       </h2>
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
